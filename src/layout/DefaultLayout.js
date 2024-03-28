@@ -16,59 +16,60 @@ const DefaultLayout = ({ children, pageTitle }) => {
   const { REACT_APP_AXIOS_URL: url } = process.env; // Base URL for Axios requests
 
   // Effect hook to refresh token on component mount
-  useEffect(() => {
-    refreshToken();
-  }, []);
+  // useEffect(() => {
+  //   refreshToken();
+  // }, []);
 
-  // Function to refresh JWT token
-  const refreshToken = async () => {
-    try {
-      // Request new token from server
-      const response = await axios.get(`${url}/token`);
-      const { accessToken } = response.data;
-      // Decode token to extract user information
-      const decoded = jwtDecode(accessToken);
-      // Update state variables
-      setToken(accessToken);
-      setExpire(decoded.exp);
-      setUser(decoded); // Set user information
+  // // Function to refresh JWT token
+  // const refreshToken = async () => {
+  //   try {
+  //     // Request new token from server
+  //     const response = await axios.get(`${url}/token`);
+  //     const { accessToken } = response.data;
+  //     // Decode token to extract user information
+  //     const decoded = jwtDecode(accessToken);
+  //     // Update state variables
+  //     setToken(accessToken);
+  //     setExpire(decoded.exp);
+  //     setUser(decoded); // Set user information
 
-      // console.log("User information after setting state:", decoded);
+  //     // console.log("User information after setting state:", decoded);
       
-    } catch (error) {
-      if (error.response) {
-        console.error('Error refreshing token:', error);
-        navigate('/', { replace: true });
-      }
-    }
-  };
+  //   } catch (error) {
+  //     if (error.response) {
+  //       console.error('Error refreshing token:', error);
+  //       navigate('/', { replace: true });
+  //     }
+  //   }
+  // };
   
 
-  // Axios interceptor to refresh token before each request
-  const axiosJWT = axios.create();
-  axiosJWT.interceptors.request.use(async (config) => {
-    const currentDate = new Date();
-    // Check if token has expired
-    if (expire * 1000 < currentDate.getTime()) {
-      try {
-        // Request new token from server
-        const response = await axios.get(`${url}/token`);
-        const { accessToken } = response.data;
-        // Update token and expiry in state
-        const decoded = jwtDecode(accessToken);
-        setToken(accessToken);
-        setExpire(decoded.exp);
-      } catch (error) {
-        console.error('Error refreshing token:', error);
-        navigate('/', { replace: true }); // Redirect to login page if token refresh fails
-      }
-    }
-    return config;
-  }, (error) => {
-    return Promise.reject(error);
-  });
+  // // Axios interceptor to refresh token before each request
+  // const axiosJWT = axios.create();
+  // axiosJWT.interceptors.request.use(async (config) => {
+  //   const currentDate = new Date();
+  //   // Check if token has expired
+  //   if (expire * 1000 < currentDate.getTime()) {
+  //     try {
+  //       // Request new token from server
+  //       const response = await axios.get(`${url}/token`);
+  //       const { accessToken } = response.data;
+  //       // Update token and expiry in state
+  //       const decoded = jwtDecode(accessToken);
+  //       setToken(accessToken);
+  //       setExpire(decoded.exp);
+  //     } catch (error) {
+  //       console.error('Error refreshing token:', error);
+  //       navigate('/', { replace: true }); // Redirect to login page if token refresh fails
+  //     }
+  //   }
+  //   return config;
+  // }, (error) => {
+  //   return Promise.reject(error);
+  // });
 
-  sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+  // sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+
   const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
   // console.log(loggedInUser);

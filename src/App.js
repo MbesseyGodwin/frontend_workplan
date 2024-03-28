@@ -1,5 +1,5 @@
 // ./frontend/src/App.js
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 
 // import './App.css';
 import "./index.css";
@@ -27,37 +27,8 @@ import AssignVehicle from './components/requests/AssignVehicle';
 
 const App = () => {
 
-
-  // const navigate = useNavigate();
-
-  const [roleID, setRoleID] = useState();
-  // const [token, setToken] = useState('');
-
-
-  const { REACT_APP_AXIOS_URL: url } = process.env;
-
-  // useEffect(() => {
-  //   refreshToken();
-  // }, []);
-
-  // const refreshToken = async () => {
-  //   try {
-  //     const response = await axios.get(`${url}/token`);
-  //     const { accessToken } = response.data;
-
-  //     // setToken(accessToken);
-
-  //     const decoded = jwtDecode(accessToken);
-  //     setRoleID(decoded.roleID)
-
-  //     // console.log(decoded);
-
-  //   } catch (error) {
-  //     if (error.response) {
-  //       // navigate('/', { replace: true });
-  //     }
-  //   }
-  // };
+  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+ 
 
   return (
     <BrowserRouter>
@@ -80,9 +51,9 @@ const App = () => {
         
 
         {/* Conditionally render the ManageUser route based on roleID */}
-        {/* {roleID === 1 && (
+        {loggedInUser.roleID === 1 && (
           <Route path='/manage-users' element={<ManageUser />} />
-        )} */}
+        )}
 
         {/* Redirect the user to the dashboard for any unmatched route */}
         {/* <Route path="*" element={<Navigate to="/dashboard" />} /> */}

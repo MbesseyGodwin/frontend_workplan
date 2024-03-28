@@ -29,7 +29,6 @@ const Login = () => {
   }
 
   // Function to handle continue button click
-  // Function to handle continue button click
   const handleContinue = (e) => {
     e.preventDefault();
 
@@ -41,11 +40,9 @@ const Login = () => {
       toast.error('Email address is not valid');
       return;
     }
-
     // If email is in correct format, proceed to show password input
     setShowPasswordInput(true);
   }
-
 
   // Function to go back to email input
   const goBackToEmail = () => {
@@ -53,12 +50,10 @@ const Login = () => {
     setPassword(''); // Clear password field
   }
 
+
   // Function to handle user login
   const handleUserLogin = async (e) => {
     e.preventDefault();
-
-    // Disable sign-in button to prevent multiple login attempts
-    // setSignInDisabled(true);
 
     try {
       // Send a login request to the backend
@@ -68,29 +63,15 @@ const Login = () => {
       });
       // Redirect to the dashboard upon successful login
       navigate('/dashboard', { replace: true });
-    } 
-    catch (error) {
+    } catch (error) {
       // Display error message if login fails
-      if (error) {
-        setLoginAttempts(loginAttempts + 1);
-        toast.error(`${error.response.data}`);
-        // Re-enable sign-in button after 2 minutes
-        // if (loginAttempts >= 2) {
-        //   setTimeout(() => {
-        //     setSignInDisabled(false);
-        //     setLoginAttempts(0);
-        //   }, 120000); // 2 minutes in milliseconds
-        // }
-      }
-      
+      if (error)  return toast.error(`${error.response.data}`);
     }
   };
 
 
-
   return (
     <div className='bg-black m-0 p-0'>
-
       <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
       <div className="flex justify-center items-center h-screen">
         <div className="login-card">
