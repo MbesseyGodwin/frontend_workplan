@@ -10,32 +10,42 @@ const Dashboard = () => {
   const [roleID, setRoleID] = useState();
   const [token, setToken] = useState('');
   const [expire, setExpire] = useState('');
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
   const navigate = useNavigate();
   const { REACT_APP_AXIOS_URL: url } = process.env;
 
 
-  const refreshToken = useCallback(async () => {
-    try {
-      const response = await axios.get(`${url}/token`);
-      const { accessToken } = response.data;
-      setToken(accessToken);
-      const decoded = jwtDecode(accessToken);
-      setUser(decoded); // Set user information
-      setFirstName(decoded.fName);
-      setExpire(decoded.exp);
-      setRoleID(decoded.roleID);
-    } catch (error) {
-      if (error.response) {
-        navigate('/', { replace: true });
-      }
-    }
-  }, [url, navigate]);
+  // const refreshToken = useCallback(async () => {
+  //   try {
+  //     const response = await axios.get(`${url}/token`);
+  //     const { accessToken } = response.data;
+  //     setToken(accessToken);
+  //     const decoded = jwtDecode(accessToken);
+  //     // setUser(decoded); // Set user information
+  //     setFirstName(decoded.fName);
+  //     setExpire(decoded.exp);
+  //     setRoleID(decoded.roleID);
+  //   } catch (error) {
+  //     if (error.response) {
+  //       navigate('/', { replace: true });
+  //     }
+  //   }
+  // }, [url, navigate]);
 
-  useEffect(() => {
-    refreshToken();
-  }, [refreshToken]);
+  // useEffect(() => {
+  //   refreshToken();
+  // }, [refreshToken]);
 
+const user = {
+  "userID": 24,
+  "fName": "NELSON",
+  "lName": "ATTAH",
+  "email": "nattah@ccfng.org",
+  "roleID": 1,
+  "user_unit": "health informatics",
+  "iat": 1711648954,
+  "exp": 1711649014
+}
 
   console.log(user);
 
@@ -88,7 +98,7 @@ return (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {dashboardLinks.map((link, index) => (
             // Conditionally render the "Manage Users" link based on roleID
-            roleID !== 1 && link.title === "manage users" ? null : (
+            user.roleID !== 1 && link.title === "manage users" ? null : (
               <Link key={index} to={`../${link.url}`} className="text-center align-center py-4 px-0 ease-in duration-500 bg-slate-300 shadow rounded no-underline hover:bg-gray-400 hover:text-white">
                 {link.icon && React.cloneElement(link.icon, { style: { color: '#912222', fontSize: 70 } })}
                 <h3 className="text-xl my-2 mx-0 pb-0 font-semibold capitalize text-dark">{link.title}</h3>
