@@ -7,6 +7,7 @@ import caritaslogo from '../../assets/images/caritas-logo4.png';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
+import jwtDecode from 'jwt-decode';
 
 const Login = () => {
   // State variables to manage email, password, and error message
@@ -15,6 +16,12 @@ const Login = () => {
   const [showPasswordInput, setShowPasswordInput] = useState(false); // State to manage showing password input
   const [signInDisabled, setSignInDisabled] = useState(false);
   const [loginAttempts, setLoginAttempts] = useState(0);
+
+  const [firstName, setFirstName] = useState('');
+  const [roleID, setRoleID] = useState();
+  const [token, setToken] = useState('');
+  const [expire, setExpire] = useState('');
+  const [user, setUser] = useState([]);
 
   // Access the navigation function from React Router
   const navigate = useNavigate()
@@ -54,18 +61,46 @@ const Login = () => {
   // Function to handle user login
   const handleUserLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
       // Send a login request to the backend
       await axios.put(`${url}/login`, {
         email,
         password,
       });
+  
+      // Call refreshToken function to update user data and set session storage
+      await refreshToken();
+  
       // Redirect to the dashboard upon successful login
       navigate('/dashboard', { replace: true });
     } catch (error) {
       // Display error message if login fails
-      if (error)  return toast.error(`${error.response.data}`);
+      if (error) return toast.error(`${error.response.data}`);
+    }
+  };
+
+  const refreshToken = async () => {
+    try {
+      const response = await axios.get(`${url}/token`);
+      const { accessToken } = response.data;
+      setToken(accessToken);
+      const decoded = jwtDecode(accessToken);
+      setUser(decoded); // Set user information
+      setFirstName(decoded.fName);
+      setExpire(decoded.exp);
+      setRoleID(decoded.roleID);
+      
+      console.log(decoded);
+  
+      // Save user data in session storage
+      sessionStorage.setItem('loggedInUser', JSON.stringify(decoded));
+  
+      return decoded; // Return decoded user data
+    } catch (error) {
+      if (error.response) {
+        navigate('/', { replace: true });
+      }
     }
   };
 

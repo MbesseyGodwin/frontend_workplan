@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import jwtDecode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
@@ -14,33 +14,31 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { REACT_APP_AXIOS_URL: url } = process.env;
 
-  useEffect(() => {
-    refreshToken();
-    // getUsers();
-  }, []);
 
-  const refreshToken = async () => {
+  const refreshToken = useCallback(async () => {
     try {
       const response = await axios.get(`${url}/token`);
       const { accessToken } = response.data;
-
       setToken(accessToken);
-      
       const decoded = jwtDecode(accessToken);
-
       setUser(decoded); // Set user information
       setFirstName(decoded.fName);
       setExpire(decoded.exp);
-      setRoleID(decoded.roleID)
-      
-      // console.log(decoded);
-
+      setRoleID(decoded.roleID);
     } catch (error) {
       if (error.response) {
         navigate('/', { replace: true });
       }
     }
-  };
+  }, [url, navigate]);
+
+  useEffect(() => {
+    refreshToken();
+  }, [refreshToken]);
+
+
+  console.log(user);
+
 
   const axiosJWT = axios.create();
   axiosJWT.interceptors.request.use(async (config) => {
