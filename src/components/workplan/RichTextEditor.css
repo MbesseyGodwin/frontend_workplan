@@ -1,0 +1,31 @@
+.editor-container {
+    padding: 0px; /* Add space around the editor */
+  }
+  
+  .public-DraftEditor-content {
+    min-height: 200px; /* Set minimum height for the editor content */
+  }
+  
+  .DraftEditor-editorContainer {
+    border: 1px solid #ccc; /* Add border to the editor */
+  }
+  
+  .toolbarClassName {
+    border-bottom: 1px solid #ccc; /* Add border to the toolbar */
+  }
+  
+  .wrapperClassName {
+    /* margin-bottom: 20px;  */
+  }
+  
+  .editorClassName {
+    padding: 0px; /* Add padding inside the editor */
+    font-size: 20px; /* Set font size for the editor content */
+    border: 1px solid black;
+  }
+
+
+  .public-DraftEditor-content{
+    padding: 0 10px;
+  }
+  

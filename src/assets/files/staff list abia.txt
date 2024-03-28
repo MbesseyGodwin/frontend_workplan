@@ -1,0 +1,214 @@
+staff list abia
+
+
+
+
+Surname	First Name	UNIT	Phone NO.	Official Email
+OKOLIE	CHUKWUEMEKALUM CHARLES	MANAGEMENT	07062074738	Cokolie@ccfng.org
+				
+ONIFADE	 ABIODUN	GRANTS/COMPLIANCE	08036442070	aonifade@ccfnd.org
+JOHNSON	KENNETH	GRANTS/COMPLIANCE	8063528803	Kjohnson@ccfng.org
+AMODU	 BENSON	GRANTS/COMPLIANCE	07068119367	abenson@ccfng.org 
+RUFAI	 ADETUTU	GRANTS/COMPLIANCE	08026602642	arufai@ccfn.org
+				
+ISHIWU	 SUNDAY	FINANCE	08039673204	sishiwu@ccfng.org
+Ntui	 VINCENT 	FINANCE	08130439520	VNTUI@ccfng.org 
+				
+UPAREGH	IMOTER	MEAL	08066007378	Iuparegh@ccfng.org
+ONOJA 	MARK	MEAL	07034848778	monoja@ccfng.org
+OKORIE	PRINCESS EZINNE	MEAL	08063528937	pokorie@ccfng.org
+ADELEKE	OLUSAYO TITILOPE	MEAL	07061339560	Oadeleke@ccfng.org
+ OBIALOR	 GINIKA	MEAL	08165806961	gobialor@ccfng.org
+FRANKLIN	ONYECHEREM ONYINYEOMA	MEAL	08032338204	fonyecherem@ccfng.org
+TERFA TIMBIR	THEOPHILUS	MEAL	07031894501	Ttimbir@ccfng.org 
+				
+SHITTU	MULIQ	HEALTH INFORMATICS	08069620527	Mshittu@ccfng.org
+AGHADINUNO	OBIORA	HEALTH INFORMATICS	08065742810	OAghadinun@ccfng.org
+MBESSEY	GODWIN	HEALTH INFORMATICS	09038337102	MAondohemba@ccfng.org
+EZEOBI	ONYEDIKACHI	HEALTH INFORMATICS	08104807107	ocallistus@ccfng.org 
+EBOH	OLUCHI	HEALTH INFORMATICS	08037931149	jeboh@ccfng.org 
+ABBA	THELMA	HEALTH INFORMATICS	08136062554	tabba@ccfng.org
+ATTAH	NELSON	HEALTH INFORMATICS	07037176436	nattah@ccfng.org
+ONYEBUCHI	EVIDENCE	HEALTH INFORMATICS	07038998478	eonyebuchi@ccfgn.org
+UZOCHUKWU	SAMUEL UGOCHUKWU	HEALTH INFORMATICS	07039338791	Suzochukwu@ccfng.org 
+				
+ATANGCHO 	JOHN SHU	LABORATORY SERVICES	08036060825	Satangcho@ccfng.org 
+OKAFOR	 IKENNA CALEB	LABORATORY SERVICES	09033353998	Iokafor@ccfng.org
+OKEKE 	CLEMENT	LABORATORY SERVICES	08035535268	cokeke@ccfng.org
+AKUJUOBI	CHISOM	LABORATORY SERVICES	'08160884759	Cakujuobi@ccfng.org
+EDEWEDE	 ONOKEVBAGBE	LABORATORY SERVICES	8064003761	Eonokevbagba@ccfng.org 
+				
+AMUTA	CHUKWUEMEKA	Care & Treatment	8060103930	Camuta@ccfng.org 
+AMADI	UCHECHUKWU	Care & Treatment	08133211959	uamadi@ccfng.org
+MADUKA	CHIKA	Care & Treatment	08033236263	Cmaduka@ccfng.org
+MORDI	ROWLAND	Care & Treatment	08130334318	mroland@ccfng.org
+OKWOLI	JONAS	Care & Treatment	08130334318	Jokwoli@ccfng.org 
+EMEHEL 	ADA	Care & Treatment	'08034553672	aemehel@ccfng.org 
+				
+ERUBAMI	 ENIOLA	EPIDEMIOLOGY AND SURVEILLANCE	08134056652	eerubami@ccfng.org
+OTU	 GEORGE	EPIDEMIOLOGY AND SURVEILLANCE	07068088322	aotu@ccfng.org 
+				
+NWAFOR	EUCHARIA	PROGRAMS	08037091786	enwafor@ccfng.org
+OYINLOYE	GBEMINIYI	PROGRAMS	'08097683731	goyinloye@ccfng.or
+OPARAH	ORJIUGO	PROGRAMS	08035954650	oopara@ccfng.org
+NNADI	DONATUS	PROGRAMS	08034000217	dnnadi@ccfng.org
+OBAL	OFEM	PROGRAMS	08058498085	oobal@ccfng.org
+UGWUTA	CHIEGOZIE EMMANUELA	PROGRAMS	07031023379	eugwuta@ccfng.org 
+ELOKA	IFEANYICHUKWU	PROGRAMS	7037205802	Ieloka@ccfng.org 
+NWOBODO	SYLVIA	PROGRAMS	8063962933	SNwobodo@ccfng.org 
+OKWOR	JACINTA NNEOMA	PROGRAMS	08162856466	JOkwor@ccfng.org 
+				
+EZEA	JOHNSON	COMMUNICATION 	08030919233	jezea@ccfng.org
+				
+NDULUE	LINUS	QUALITY IMPROVEMENT	08060998878	ondulue@ccfng.org
+MBUK	QUEEN	QUALITY IMPROVEMENT	08037379658	qmbuk@ccfng.org
+EYO	SAVIOUR	QUALITY IMPROVEMENT	08034898136	seyo@ccfng.org
+NWOSU 	DERICK	QUALITY IMPROVEMENT	08167477024	dnwosu@ccfng.org
+				
+AZUKA	GIFT	ADMIN SERVICES	08060106667	gazuka@ccfng.org
+EGWUONWU	CHINONSO JUDE	ADMIN SERVICES	07032116933	echinoso@ccfng.org
+AGIM	FRANCIS	ADMIN SERVICES	08080338795	fagim@ccfng.org
+UMUNNAKWE	EVANGELINE	ADMIN SERVICES	08109031027	evengeline@gmail.com
+IFEANYICHUKWU 	TIMOTY	ADMIN SERVICES	'09032399430	ifeanyichukwu@gmail.com 
+UMUNNAKWE	CHINBUONU PRISCA	ADMIN SERVICES	08163501896	umunnakwechibuonuprisca@gmail.com
+UGWADIKE 	KINGSLEY	ADMIN SERVICES	08069838915	Kugwadike@ccfng.org 
+GABRIEL	GEORGE ONYEBUCHI	ADMIN SERVICES	08134410050	onyebuchigeorge55@gmail.com
+				
+OGUNLADE	GABRIEL	ICT	08030704504	gogunlade@ccfng.org 
+				
+EZE 	FELIX	TRANSPORT AND LOGISTICS	08037514264	feze@ccfng.org
+OKON	EYO	TRANSPORT AND LOGISTICS	08093203616	uokoneccfng.org
+ACHEGBULU	ADEJO COLINS	TRANSPORT AND LOGISTICS	07031300537	aachegbulu
+IKPEBE	BENJAMIN	TRANSPORT AND LOGISTICS	08166120394	bikpebe@ccfng,org
+UGWU	ERNEST	TRANSPORT AND LOGISTICS	08030980608	eugwu@ccfng.org
+
+
+EJAIDU	JOHN	TRANSPORT AND LOGISTICS	08066822295	jejaidu@ccfng.org
+
+
+JUDE	ABONYI	TRANSPORT AND LOGISTICS	8035913075	jabonyi@ccfng.org
+CHIDOZIE	UZOIGWE	TRANSPORT AND LOGISTICS	7012701680	Cuzoigwe@ccfng.org
+ERIC ERUKE	ASIVWENETA	TRANSPORT AND LOGISTICS	7030248586	Easiuweneta@ccfng.org
+WILLIAMS	KWALDET	TRANSPORT AND LOGISTICS	08030600495	Wkwaldet@ccfng.org
+UCHOGWU	ISAH	TRANSPORT AND LOGISTICS	07037696624	iuchogwu@ccfng.org
+OCHI 	CAJETAN	TRANSPORT AND LOGISTICS	07035979428	Cochi@ccfng.org
+				
+AMARA	NZEAKO	PHARMACY AND SUPPLY CHAIN	08065621514	anzeako@ccfng.org
+JOHN 	AMGAH	PHARMACY AND SUPPLY CHAIN	08061241175	jamgah@ccfng.org
+OTTIH	GERALD	PHARMACY AND SUPPLY CHAIN	07067652724	gottih@ccfng.org
+BEN-ABUCHI	AGATHA	PHARMACY AND SUPPLY CHAIN	'07030821711	Cben-Abuchi@ccfng.org
+AMARA	CHUKWUAGOZIE	PHARMACY AND SUPPLY CHAIN	8160761730	Achukwuagozie@ccfng.org
+				
+EKEH	SANDRA CHINWE	PREVENTION CARE AND SUPPORT	08053224940	sekeh@ccfng.org
+NWAKAMMA	IKENNA	PREVENTION CARE AND SUPPORT	08066199289	inwakamm@ccfng.org
+EDOJA	PRECIOUS	PREVENTION CARE AND SUPPORT	07032846091	pedoja@ccfng.org
+UKPABI	EMEKE GODSWILL	PREVENTION CARE AND SUPPORT	07030314813	eukpabi@ccfng,org
+OBOKON 	 GABRIEL	PREVENTION CARE AND SUPPORT	07030288689	gobokon@ccfng.org
+AMAKA	JIDEOFOR	PREVENTION CARE AND SUPPORT	8068652812	ajideofor@ccfng.org
+ENWEREM	FRANKLIN	PREVENTION CARE AND SUPPORT	08081062031	FEnwerem@ccfng,org
+
+
+
+
+
+-- Insert dummy data into User table
+INSERT INTO User (username, password, email, first_name, last_name, role_id, unit_id, department_id) VALUES
+('admin_user', 'admin_password', 'admin@ccfng.org', 'Admin', 'User', 1, 1, 1),
+('Cokolie', 'password1', 'Cokolie@ccfng.org', 'CHUKWUEMEKALUM CHARLES', 'OKOLIE', 2, 2, 1),
+('aonifade', 'password2', 'aonifade@ccfnd.org', 'ABIODUN', 'ONIFADE', 2, 3, 1),
+('Kjohnson', 'password3', 'Kjohnson@ccfng.org', 'KENNETH', 'JOHNSON', 2, 3, 1),
+('abenson', 'password4', 'abenson@ccfng.org', 'BENSON', 'AMODU', 2, 3, 1),
+('arufai', 'password5', 'arufai@ccfn.org', 'ADETUTU', 'RUFAI', 2, 3, 1),
+('sishiwu', 'password6', 'sishiwu@ccfng.org', 'SUNDAY', 'ISHIWU', 2, 4, 1),
+('VNTUI', 'password7', 'VNTUI@ccfng.org', 'VINCENT', 'Ntui', 2, 4, 1),
+('Iuparegh', 'password8', 'Iuparegh@ccfng.org', 'IMOTER', 'UPAREGH', 2, 5, 1),
+('monoja', 'password9', 'monoja@ccfng.org', 'MARK', 'ONOJA', 2, 5, 1),
+('pokorie', 'password10', 'pokorie@ccfng.org', 'PRINCESS EZINNE', 'OKORIE', 2, 5, 1),
+('Oadeleke', 'password11', 'Oadeleke@ccfng.org', 'OLUSAYO TITILOPE', 'ADELEKE', 2, 5, 1),
+('gobialor', 'password12', 'gobialor@ccfng.org', 'GINIKA', 'OBIALOR', 2, 5, 1),
+('fonyecherem', 'password13', 'fonyecherem@ccfng.org', 'ONYECHEREM ONYINYEOMA', 'FRANKLIN', 2, 5, 1),
+('Ttimbir', 'password14', 'Ttimbir@ccfng.org', 'TERFA TIMBIR', 'THEOPHILUS', 2, 5, 1),
+('Mshittu', 'password15', 'Mshittu@ccfng.org', 'MULIQ', 'SHITTU', 2, 6, 1),
+('OAghadinun', 'password16', 'OAghadinun@ccfng.org', 'OBIORA', 'AGHADINUNO', 2, 6, 1),
+('MAondohemba', 'password17', 'MAondohemba@ccfng.org', 'GODWIN', 'MBESSEY', 2, 6, 1),
+('ocallistus', 'password18', 'ocallistus@ccfng.org', 'ONYEDIKACHI', 'EZEOBI', 2, 6, 1),
+('jeboh', 'password19', 'jeboh@ccfng.org', 'OLUCHI', 'EBOH', 2, 6, 1),
+('tabba', 'password20', 'tabba@ccfng.org', 'THELMA', 'ABBA', 2, 6, 1),
+('nattah', 'password21', 'nattah@ccfng.org', 'NELSON', 'ATTAH', 2, 6, 1),
+('eonyebuchi', 'password22', 'eonyebuchi@ccfgn.org', 'EVIDENCE', 'ONYEBUCHI', 2, 6, 1),
+('Suzochukwu', 'password23', 'Suzochukwu@ccfng.org', 'SAMUEL UGOCHUKWU', 'UZOCHUKWU', 2, 6, 1),
+('Satangcho', 'password24', 'Satangcho@ccfng.org', 'JOHN SHU', 'ATANGCHO', 2, 7, 1),
+('Iokafor', 'password25', 'Iokafor@ccfng.org', 'IKENNA CALEB', 'OKAFOR', 2, 7, 1),
+('cokeke', 'password26', 'cokeke@ccfng.org', 'CLEMENT', 'OKEKE', 2, 7, 1),
+('Cakujuobi', 'password27', 'Cakujuobi@ccfng.org', 'CHISOM', 'AKUJUOBI', 2, 7, 1),
+('Eonokevbagba', 'password28', 'Eonokevbagba@ccfng.org', 'ONOKEVBAGBE', 'EDEWEDE', 2, 7, 1),
+('Camuta', 'password29', 'Camuta@ccfng.org', 'CHUKWUEMEKA', 'AMUTA', 2, 8, 1),
+('uamadi', 'password30', 'uamadi@ccfng.org', 'UCHECHUKWU', 'AMADI', 2, 8, 1),
+('Cmaduka', 'password31', 'Cmaduka@ccfng.org', 'CHIKA', 'MADUKA', 2, 8, 1),
+('mroland', 'password32', 'mroland@ccfng.org', 'ROWLAND', 'MORDI', 2, 8, 1),
+('Jokwoli', 'password33', 'Jokwoli@ccfng.org', 'JONAS', 'OKWOLI', 2, 8, 1),
+('aemehel', 'password34', 'aemehel@ccfng.org', 'ADA', 'EMEHEL', 2, 8, 1),
+('eerubami', 'password35', 'eerubami@ccfng.org', 'ENIOLA', 'ERUBAMI', 2, 9, 1),
+('aotu', 'password36', 'aotu@ccfng.org', 'GEORGE', 'OTU', 2, 9, 1);
+
+
+
+
+
+
+INSERT INTO User (username, password, email, first_name, last_name, role_id, unit_id, department_id) VALUES
+('enwafor', 'password37', 'enwafor@ccfng.org', 'EUCHARIA', 'NWAFOR', 2, 9, 1),
+('goyinloye', 'password38', 'goyinloye@ccfng.org', 'GBEMINIYI', 'OYINLOYE', 2, 9, 1),
+('oopara', 'password39', 'oopara@ccfng.org', 'ORJIUGO', 'OPARAH', 2, 9, 1),
+('dnnadi', 'password40', 'dnnadi@ccfng.org', 'DONATUS', 'NNADI', 2, 9, 1),
+('oobal', 'password41', 'oobal@ccfng.org', 'OFEM', 'OBAL', 2, 9, 1),
+('eugwuta', 'password42', 'eugwuta@ccfng.org', 'CHIEGOZIE EMMANUELA', 'UGWUTA', 2, 9, 1),
+('Ieloka', 'password43', 'Ieloka@ccfng.org', 'IFEANYICHUKWU', 'ELOKA', 2, 9, 1),
+('SNwobodo', 'password44', 'SNwobodo@ccfng.org', 'SYLVIA', 'NWOBODO', 2, 9, 1),
+('JOkwor', 'password45', 'JOkwor@ccfng.org', 'JACINTA NNEOMA', 'OKWOR', 2, 9, 1),
+('jezea', 'password46', 'jezea@ccfng.org', 'JOHNSON', 'EZE', 2, 10, 1),
+('ondulue', 'password47', 'ondulue@ccfng.org', 'LINUS', 'NDULUE', 2, 11, 1),
+('qmbuk', 'password48', 'qmbuk@ccfng.org', 'QUEEN', 'MBUK', 2, 11, 1),
+('seyo', 'password49', 'seyo@ccfng.org', 'SAVIOUR', 'EYO', 2, 11, 1),
+('dnwosu', 'password50', 'dnwosu@ccfng.org', 'DERICK', 'NWOSU', 2, 11, 1),
+('gazuka', 'password51', 'gazuka@ccfng.org', 'GIFT', 'AZUKA', 2, 12, 1),
+('echinoso', 'password52', 'echinoso@ccfng.org', 'CHINONSO JUDE', 'EGWUONWU', 2, 12, 1),
+('fagim', 'password53', 'fagim@ccfng.org', 'FRANCIS', 'AGIM', 2, 12, 1),
+('evengeline', 'password54', 'evengeline@gmail.com', 'EVANGELINE', 'UMUNNAKWE', 2, 12, 1),
+('ifeanyichukwu', 'password55', 'ifeanyichukwu@gmail.com', 'TIMOTY', 'IFEANYICHUKWU', 2, 12, 1),
+('umunnakwechibuonuprisca', 'password56', 'umunnakwechibuonuprisca@gmail.com', 'CHINBUONU PRISCA', 'UMUNNAKWE', 2, 12, 1),
+('Kugwadike', 'password57', 'Kugwadike@ccfng.org', 'KINGSLEY', 'UGWADIKE', 2, 12, 1),
+('onyebuchigeorge55', 'password58', 'onyebuchigeorge55@gmail.com', 'GEORGE ONYEBUCHI', 'GABRIEL', 2, 12, 1),
+('gogunlade', 'password59', 'gogunlade@ccfng.org', 'GABRIEL', 'OGUNLADE', 2, 13, 1),
+('feze', 'password60', 'feze@ccfng.org', 'FELIX', 'EZE', 2, 14, 1),
+('uokoneccfng.org', 'password61', 'uokoneccfng.org', 'EYO', 'OKON', 2, 14, 1),
+('aachegbulu', 'password62', 'aachegbulu', 'ADEJO COLINS', 'ACHEGBULU', 2, 14, 1),
+('bikpebe', 'password63', 'bikpebe@ccfng.org', 'BENJAMIN', 'IKPEBE', 2, 14, 1),
+('eugwu', 'password64', 'eugwu@ccfng.org', 'ERNEST', 'UGWU', 2, 14, 1),
+('jejaidu', 'password65', 'jejaidu@ccfng.org', 'JOHN', 'EJAIDU',  2, 14, 1);
+
+
+INSERT INTO User (username, password, email, first_name, last_name, role_id, unit_id, department_id) VALUES
+('jabonyi', 'password66', 'jabonyi@ccfng.org', 'ABONYI', 'JUDE', 2, 14, 1),
+('Cuzoigwe', 'password67', 'Cuzoigwe@ccfng.org', 'UZOIGWE', 'CHIDOZIE', 2, 14, 1),
+('Easiuweneta', 'password68', 'Easiuweneta@ccfng.org', 'ERIC ERUKE', 'ASIVWENETA', 2, 14, 1),
+('Wkwaldet', 'password69', 'Wkwaldet@ccfng.org', 'KWALDET', 'WILLIAMS', 2, 14, 1),
+('iuchogwu', 'password70', 'iuchogwu@ccfng.org', 'ISAH', 'UCHOGWU', 2, 14, 1),
+('Cochi', 'password71', 'Cochi@ccfng.org', 'CAJETAN', 'OCHI', 2, 14, 1),
+('anzeako', 'password72', 'anzeako@ccfng.org', 'NZEAKO', 'AMARA', 2, 15, 1),
+('jamgah', 'password73', 'jamgah@ccfng.org', 'JOHN', 'AMGAH', 2, 15, 1),
+('gottih', 'password74', 'gottih@ccfng.org', 'GERALD', 'OTTIH', 2, 15, 1),
+('Cben-Abuchi', 'password75', 'Cben-Abuchi@ccfng.org', 'AGATHA', 'BEN-ABUCHI', 2, 15, 1),
+('Achukwuagozie', 'password76', 'Achukwuagozie@ccfng.org', 'CHUKWUAGOZIE', 'AMARA', 2, 15, 1),
+('sekeh', 'password77', 'sekeh@ccfng.org', 'SANDRA CHINWE', 'EKEH', 2, 16, 1),
+('inwakamm', 'password78', 'inwakamm@ccfng.org', 'IKENNA', 'NWAKAMMA', 2, 16, 1),
+('pedoja', 'password79', 'pedoja@ccfng.org', 'PRECIOUS', 'EDOJA', 2, 16, 1),
+('eukpabi', 'password80', 'eukpabi@ccfng.org', 'EMEKE GODSWILL', 'UKPABI', 2, 16, 1),
+('gobokon', 'password81', 'gobokon@ccfng.org', 'GABRIEL', 'OBOKON', 2, 16, 1),
+('ajideofor', 'password82', 'ajideofor@ccfng.org', 'JIDEOFOR', 'AMAKA', 2, 16, 1),
+('FEnwerem', 'password83', 'FEnwerem@ccfng.org', 'FRANKLIN', 'ENWEREM', 2, 16, 1);
+
+
+
+
+

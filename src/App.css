@@ -1,0 +1,77 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* START Login & Signup Components */
+#auth-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+#login-container, #signup-container {
+  border: 2px solid black;
+  padding: 1rem 1.25rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+}
+
+input {
+  margin: 0.5rem 0;
+  padding: 0.25rem;
+}
+/* END Login & Signup Components */
+/* START Navbar Component */
+#navbar-container {
+  display: flex;
+  width: 100%;
+  padding: 1rem 10%;
+  background-color: rgb(230, 230, 230);
+}
+
+#navbar-container h1 {
+  width: 20%;
+}
+
+nav {
+  display: flex;
+  width: 80%;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.nav-btn {
+  cursor: pointer;
+}
+/* END Navbar Component */
+/* START Dashboard Component */
+#dashboard-container {
+  padding: 1rem 10%;
+}
+
+table {
+  padding: 1rem 0;
+  border-spacing: 0px;
+  border-collapse: separate;
+  text-align: left;
+}
+
+table thead tr th {
+  padding-bottom: 0.25rem;
+  border-bottom: 2px solid black;
+}
+
+table tbody tr:first-of-type td {
+  padding-top: 0.25rem;
+}
+
+th {
+  padding-right: 3rem;
+}
+/* END Dashboard Component */

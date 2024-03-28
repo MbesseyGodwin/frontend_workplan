@@ -1,0 +1,24 @@
+.accordion-button:not(.collapsed) {
+    color: white !important;
+    background-color: #840606 !important;
+    box-shadow:none !important;
+}
+
+
+
+/* .accordion-button:hover {
+    color: white !important;
+    background-color: #ac8d8d !important;
+    box-shadow:none !important;
+} */
+
+
+th{
+    text-transform: capitalize !important;
+}
+
+
+.dropdown-content{
+    background-color: red;
+    /* z-index: 1; */
+}

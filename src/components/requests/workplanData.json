@@ -1,0 +1,105 @@
+{
+    "Monday": [
+      {
+        "Facility": "Hospital A",
+        "Location": "City A",
+        "Team": "Health Promotion Team",
+        "Specific Task": "Conduct HIV awareness seminar",
+        "Departure Time": "9:00 AM",
+        "Number of Staff on Trip": 5,
+        "Logistic Required": "Yes",
+        "T&L Staff Assigned": "John Doe",
+        "Implementation Status": "Pending"
+      },
+      {
+        "Facility": "Hospital AT",
+        "Location": "Aba",
+        "Team": "Health Informatics",
+        "Specific Task": "Conduct HIV awareness seminar",
+        "Departure Time": "9:00 AM",
+        "Number of Staff on Trip": 5,
+        "Logistic Required": "Yes",
+        "T&L Staff Assigned": "okon",
+        "Implementation Status": "Pending"
+      }
+    ],
+    "Tuesday": [
+      {
+        "Facility": "Clinic B",
+        "Location": "Town B",
+        "Team": "Community Health Workers",
+        "Specific Task": "Distribute HIV testing kits",
+        "Departure Time": "10:00 AM",
+        "Number of Staff on Trip": 3,
+        "Logistic Required": "No",
+        "T&L Staff Assigned": "",
+        "Implementation Status": "Completed"
+      }
+    ],
+    "Wednesday": [
+      {
+        "Facility": "Health Center C",
+        "Location": "City C",
+        "Team": "Medical Staff",
+        "Specific Task": "Conduct HIV screening",
+        "Departure Time": "8:30 AM",
+        "Number of Staff on Trip": 4,
+        "Logistic Required": "Yes",
+        "T&L Staff Assigned": "Jane Smith",
+        "Implementation Status": "Ongoing"
+      }
+    ],
+    "Thursday": [
+      {
+        "Facility": "Dispensary D",
+        "Location": "Town D",
+        "Team": "Volunteers",
+        "Specific Task": "Organize HIV support group",
+        "Departure Time": "11:00 AM",
+        "Number of Staff on Trip": 2,
+        "Logistic Required": "No",
+        "T&L Staff Assigned": "",
+        "Implementation Status": "Planned"
+      }
+    ],
+    "Friday": [
+      {
+        "Facility": "Medical Center E",
+        "Location": "City E",
+        "Team": "Health Educators",
+        "Specific Task": "Conduct HIV prevention workshop",
+        "Departure Time": "9:30 AM",
+        "Number of Staff on Trip": 6,
+        "Logistic Required": "Yes",
+        "T&L Staff Assigned": "Mark Johnson",
+        "Implementation Status": "Delayed"
+      }
+    ],
+    "Saturday": [
+      {
+        "Facility": "Dispensary D",
+        "Location": "Town D",
+        "Team": "Volunteers",
+        "Specific Task": "Organize HIV support group",
+        "Departure Time": "11:00 AM",
+        "Number of Staff on Trip": 2,
+        "Logistic Required": "No",
+        "T&L Staff Assigned": "",
+        "Implementation Status": "Planned"
+      }
+    ],
+    "Sunday": [
+      {
+        "Facility": "Dispensary D",
+        "Location": "Town D",
+        "Team": "Volunteers",
+        "Specific Task": "Organize HIV support group",
+        "Departure Time": "11:00 AM",
+        "Number of Staff on Trip": 2,
+        "Logistic Required": "No",
+        "T&L Staff Assigned": "",
+        "Implementation Status": "Planned"
+      }
+    ]
+  }
+  
