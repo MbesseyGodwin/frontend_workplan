@@ -27,7 +27,7 @@ import AssignVehicle from './components/requests/AssignVehicle';
 
 const App = () => {
 
-  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  // const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
  
 
   return (
@@ -51,9 +51,9 @@ const App = () => {
         
 
         {/* Conditionally render the ManageUser route based on roleID */}
-        {loggedInUser.roleID === 1 && (
+        {/* {loggedInUser.roleID === 1 && ( */}
           <Route path='/manage-users' element={<ManageUser />} />
-        )}
+        {/* )} */}
 
         {/* Redirect the user to the dashboard for any unmatched route */}
         {/* <Route path="*" element={<Navigate to="/dashboard" />} /> */}
