@@ -55,7 +55,7 @@ const Navbar = ({ firstName }) => {
 
   return (
 
-        <div className="mb-12">
+        <div className="mb-4">
           <nav className="bg-gray-300 border-slate-900 dark:bg-gray-900">
             <div className="flex flex-wrap justify-between items-center py-3 mx-2">
               {/* Conditionally render the Dashboard button based on screen size */}
