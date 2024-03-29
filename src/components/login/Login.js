@@ -11,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState('123');
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [loading, setLoading] = useState(false); // State to manage loading state
+  const [user, setUser] = useState('123');
 
   const navigate = useNavigate();
   const { REACT_APP_AXIOS_URL: url } = process.env;
@@ -39,35 +40,37 @@ const Login = () => {
     e.preventDefault();
     setLoading(true); // Set loading state to true during login
     try {
-      await axios.put(`${url}/login`, {
+      const response = await axios.put(`${url}/login`, {
         email,
         password,
       });
-      await refreshToken();
+  
+      if (!response || !response.data) {
+        throw new Error('Invalid response from server');
+      }
+  
+      const { accessToken } = response.data;
+  
+      localStorage.setItem('accessToken', accessToken);
+
+  
+      const decodedToken = jwtDecode(accessToken);
+
+  sessionStorage.setItem('loggedInUser', JSON.stringify(decodedToken));
+      console.log('Decoded token:', decodedToken);
+      setUser(decodedToken)
+  
       navigate('/dashboard', { replace: true });
     } catch (error) {
-      if (error) {
-        toast.error(`${error.response.data}`);
-        setLoading(false); // Set loading state to false in case of error
-      }
+      console.error('Error logging in:', error);
+      toast.error('Failed to login');
+      setLoading(false);
     }
   };
 
-  const refreshToken = async () => {
-    try {
-      const response = await axios.get(`${url}/token`);
-      const { accessToken } = response.data;
-      const decoded = jwtDecode(accessToken);
-      setLoading(false); // Set loading state to false after successful login
-      // Set user information
-      sessionStorage.setItem('loggedInUser', JSON.stringify(decoded));
-      navigate('/dashboard', { replace: true });
-    } catch (error) {
-      if (error.response) {
-        navigate('/', { replace: true });
-      }
-    }
-  };
+
+  
+  
 
   return (
     <div className='bg-black m-0 p-0'>

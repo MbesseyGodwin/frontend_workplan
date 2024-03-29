@@ -21,7 +21,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, user = {} }) => {
     const logoutTimer = setTimeout(() => {
       confirmLogout();
       // handleUserLogout();
-      
+
     }, 30 * 60 * 1000); // 30 minutes in milliseconds
 
     return () => clearTimeout(logoutTimer);
@@ -35,29 +35,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, user = {} }) => {
   const [roleID, setRoleID] = useState();
   const [token, setToken] = useState('');
 
-  useEffect(() => {
-    refreshToken();
-  }, []);
 
-  const refreshToken = async () => {
-    try {
-      const response = await axios.get(`${url}/token`);
-      const { accessToken } = response.data;
-
-      setToken(accessToken);
-
-      const decoded = jwtDecode(accessToken);
-      setRoleID(decoded.roleID)
-
-      // console.log(decoded);
-
-    } catch (error) {
-      if (error.response) {
-        navigate('/', { replace: true });
-      }
-    }
-  };
-
+  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
 
 
@@ -158,7 +137,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, user = {} }) => {
           <ul className="space-y-2 space-x-0 px-5 text-center">
             {links.map((link, index) => (
 
-              roleID !== 1 && link.path === "/manage-users" ? null : (
+              loggedInUser.roleID !== 1 && link.path === "/manage-users" ? null : (
                 <li key={index}>
                   <NavLink to={link.path} className={`block py-2 px-3 hover:bg-gray-400 rounded no-underline ${location.pathname === link.path ? 'bg-red-900 hover:bg-red-900 text-white' : ''}`}>
                     {link.text}
@@ -196,11 +175,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, user = {} }) => {
           </div>
         </div>
       )}
-
-
-
-
-
 
     </aside>
   );
