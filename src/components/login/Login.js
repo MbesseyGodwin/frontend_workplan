@@ -7,8 +7,8 @@ import jwtDecode from 'jwt-decode';
 import caritaslogo from '../../assets/images/caritas-logo4.png';
 
 const Login = () => {
-  const [email, setEmail] = useState('nattah@ccfng.org');
-  const [password, setPassword] = useState('123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [loading, setLoading] = useState(false); // State to manage loading state
   const [user, setUser] = useState('123');
