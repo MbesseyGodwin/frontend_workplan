@@ -1,64 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
-import jwtDecode from "jwt-decode";
-import { useNavigate } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
-  const [firstName, setFirstName] = useState('');
-  const [roleID, setRoleID] = useState();
-  const [token, setToken] = useState('');
-  const [expire, setExpire] = useState('');
-  const [user, setUser] = useState([]);
-  const navigate = useNavigate();
-  const { REACT_APP_AXIOS_URL: url } = process.env;
-
-
-  // const refreshToken = useCallback(async () => {
-  //   try {
-  //     const response = await axios.get(`${url}/token`);
-  //     const { accessToken } = response.data;
-  //     setToken(accessToken);
-  //     const decoded = jwtDecode(accessToken);
-  //     setUser(decoded); // Set user information
-  //     setFirstName(decoded.fName);
-  //     setExpire(decoded.exp);
-  //     setRoleID(decoded.roleID);
-  //   } catch (error) {
-  //     if (error.response) {
-  //       // navigate('/', { replace: true });
-  //       console.log(error);
-  //     }
-  //   }
-  // }, [url]);
-
-  // useEffect(() => {
-  //   refreshToken();
-  // }, [refreshToken]);
-
-
-  // const axiosJWT = axios.create();
-  // axiosJWT.interceptors.request.use(async (config) => {
-  //   const currentDate = new Date();
-  //   if (expire * 1000 < currentDate.getTime()) {
-  //     const response = await axios.get(`${url}/token`);
-  //     const { accessToken } = response.data;
-  //     config.headers.Authorization = `Bearer ${accessToken}`;
-  //     setToken(accessToken);
-  //     const decoded = jwtDecode(accessToken);
-
-  //     setUser(decoded)
-
-  //     setFirstName(decoded.fName);
-  //     setExpire(decoded.exp);
-  //   }
-  //   return config;
-  // }, (error) => {
-  //   return Promise.reject(error);
-  // });
-
-  // sessionStorage.setItem('loggedInUser', JSON.stringify(user));
 
   const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
@@ -74,10 +18,7 @@ const Dashboard = () => {
     { title: "Visit Summary", url: "visit-summary", icon: <i className="fa-solid fa-minimize"></i> },
     { title: "manage users", url: "manage-users", icon: <i className="fa-solid fa-users"></i> },
     { title: "Account settings", url: "settings", icon: <i className="fa-solid fa-gear"></i> },
-
   ];
-
-// Assuming roleID is available in the component state
 
 return (
   <div id="dashboard-container">

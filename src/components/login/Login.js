@@ -44,22 +44,19 @@ const Login = () => {
         email,
         password,
       });
-  
+
       if (!response || !response.data) {
         throw new Error('Invalid response from server');
       }
-  
-      const { accessToken } = response.data;
-  
-      localStorage.setItem('accessToken', accessToken);
 
-  
+      const { accessToken } = response.data;
+      localStorage.setItem('accessToken', accessToken);
       const decodedToken = jwtDecode(accessToken);
 
-  sessionStorage.setItem('loggedInUser', JSON.stringify(decodedToken));
+      sessionStorage.setItem('loggedInUser', JSON.stringify(decodedToken));
       console.log('Decoded token:', decodedToken);
       setUser(decodedToken)
-  
+
       navigate('/dashboard', { replace: true });
     } catch (error) {
       console.error('Error logging in:', error);
@@ -69,8 +66,8 @@ const Login = () => {
   };
 
 
-  
-  
+
+
 
   return (
     <div className='bg-black m-0 p-0'>

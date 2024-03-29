@@ -24,71 +24,19 @@ function CreateWorkplan() {
 
 
   const axiosJWT = axios.create();
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [userID, setUserID] = useState('');
-
-  const [token, setToken] = useState('');
-  const [expire, setExpire] = useState('');
-
-    const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
-
-  // console.log(loggedInUser.userID);
-
-
-  // State for managing workplan data
-  const refreshToken = async () => {
-    try {
-      const response = await axios.get(`${url}/token`);
-      setToken(response.data.accessToken);
-      const decoded = jwtDecode(response.data.accessToken);
-      setFirstName(decoded.fName);
-      setExpire(decoded.exp);
-    } catch (error) {
-      if (error.response) {
-        // navigate('/', { replace: true });
-      }
-    }
-  };
-
-
-  axiosJWT.interceptors.request.use(async (config) => {
-    const currentDate = new Date();
-
-    if (expire * 1000 < currentDate.getTime()) {
-      const response = await axios.get(`${url}/token`);
-      config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-      setToken(response.data.accessToken);
-      const decoded = jwtDecode(response.data.accessToken);
-      setFirstName(decoded.fName);
-      setLastName(decoded.lName);
-      setUserID(decoded.userID)
-      setExpire(decoded.exp);
-    }
-    return config;
-  }, (error) => {
-    return Promise.reject(error);
-  });
-
+  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
   // Use useMemo to memoize the loginUser object
   const loginUser = useMemo(() => ({
-    label: `${firstName} ${lastName}`,
-    value: userID,
-  }), [firstName, lastName, userID]); // Only re-create if firstName, lastName, or userID change
-
-
-  const [users, setUsers] = useState([]);
+    label: `${loggedInUser.fName} ${loggedInUser.lName}`,
+    value: loggedInUser.userID,
+  }), [loggedInUser.fName, loggedInUser.lName, loggedInUser.userID]); // Only re-create if firstName, lastName, or userID change
 
   const [selectedTeam, setSelectedTeam] = useState([]);
 
 
   useEffect(() => {
-    refreshToken();
-    fetchUsers();
     setSelectedTeam([loginUser])
-
     fetchWorkplanDays();
   }, []);
 
@@ -102,14 +50,6 @@ function CreateWorkplan() {
 
 
 
-  const fetchUsers = async () => {
-    try {
-      const response = await axiosJWT.get(`${url}/users`); // Assuming this is the correct endpoint for fetching users
-      setUsers(response.data);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
 
   // console.log(users);
 

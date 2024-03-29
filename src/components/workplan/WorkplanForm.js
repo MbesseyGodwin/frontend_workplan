@@ -40,47 +40,17 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
   };
 
 
-  // State for managing workplan data
-  const refreshToken = async () => {
-    try {
-      const response = await axios.get(`${url}/token`);
-      setToken(response.data.accessToken);
-      const decoded = jwtDecode(response.data.accessToken);
-      setFirstName(decoded.fName);
-      setExpire(decoded.exp);
-    } catch (error) {
-      if (error.response) {
-        // navigate('/', { replace: true });
-      }
-    }
-  };
+ 
 
   const axiosJWT = axios.create();
 
-  axiosJWT.interceptors.request.use(async (config) => {
-    const currentDate = new Date();
-
-    if (expire * 1000 < currentDate.getTime()) {
-      const response = await axios.get(`${url}/token`);
-      config.headers.Authorization = `Bearer ${response.data.accessToken}`;
-      setToken(response.data.accessToken);
-      const decoded = jwtDecode(response.data.accessToken);
-      setFirstName(decoded.fName);
-      setLastName(decoded.lName);
-      setUserID(decoded.userID)
-      setExpire(decoded.exp);
-    }
-    return config;
-  }, (error) => {
-    return Promise.reject(error);
-  });
 
 
-  // Use useMemo to memoize the loginUser object
-  const loginUser = useMemo(() => ({
-    label: `${firstName} ${lastName}`,
-    value: userID,
-  }), [firstName, lastName, userID]); // Only re-create if firstName, lastName, or userID change
+   // Use useMemo to memoize the loginUser object
+   const loginUser = useMemo(() => ({
+    label: `${loggedInUser.fName} ${loggedInUser.lName}`,
+    value: loggedInUser.userID,
+  }), [loggedInUser.fName, loggedInUser.lName, loggedInUser.userID]); // Only re-create if firstName, lastName, or userID change
 
 
   const [users, setUsers] = useState([]);
@@ -89,7 +59,6 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
 
   useEffect(() => {
-    refreshToken();
     fetchUsers();
     setSelectedTeam([loginUser])
   }, []);
