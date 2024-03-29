@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import caritaslogo from '../../assets/images/caritas-logo4.png';
+    // import useMediaQuery from '@material-ui/core/useMediaQuery'; // Import useMediaQuery from Material-UI
+    
 
 const Navbar = ({ firstName }) => {
   const navigate = useNavigate();
@@ -48,28 +50,23 @@ const Navbar = ({ firstName }) => {
     };
   }, []);
 
+
+  // const isDesktop = useMediaQuery('(min-width:600px)'); // Check if it's desktop (screen width > 600px)
+
   return (
-    <div className="mb-12">
-      <nav className="bg-gray-300 border-slate-900 dark:bg-gray-900" >
-        <div className="flex flex-wrap justify-between items-center px-1 py-4 mx-5">
 
-          <Link to="#" className="flex items-center space-x-3 rtl:space-x-reverse no-underline">
-            <span style={{ color: '#912222' }} className="self-center text-2xl uppercase font-semibold whitespace-nowrap dark:text-white">dashboard</span>
-          </Link>
-
-          <div className="flex justify-end items-center space-x-6 rtl:space-x-reverse">
-            <Link to="#" className="uppercase no-underline inline-block px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-900 border border-transparent rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-gray focus:border-gray-900 active:bg-gray-900" onClick={handleUserLogout}>
-              Logout {firstName}
-            </Link>
-          </div>
-
+        <div className="mb-12">
+          <nav className="bg-gray-300 border-slate-900 dark:bg-gray-900">
+            <div className="flex flex-wrap justify-between items-center py-3 mx-2">
+              {/* Conditionally render the Dashboard button based on screen size */}
+                <Link to="#" className="btn btn-dark badge text-sm small btn-sm flex justify-start uppercase">caritas</Link>
+              {/* <Link to="#" className="btn btn-danger badge text-sm small btn-sm justify-end uppercase" onClick={handleUserLogout}>Logout {firstName}</Link> */}
+              <Link to="#" className="btn btn-danger badge text-sm small btn-sm justify-end uppercase" onClick={handleUserLogout}>Logout</Link>
+            </div>
+          </nav>
         </div>
-        <div>
-          {/* <img className='caritaslogo-navbar' src={caritaslogo} alt='logo' /> */}
-        </div>
-      </nav>
-    </div>
-  );
+        
+      );
 
 }
 

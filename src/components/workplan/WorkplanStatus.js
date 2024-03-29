@@ -18,6 +18,8 @@ function WorkplanStatus() {
   const [workplans, setWorkplans] = useState([]);
   const [selectedWorkplan, setSelectedWorkplan] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(true); // Added loading state
+
 
   const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
@@ -29,6 +31,7 @@ function WorkplanStatus() {
     try {
       const response = await axios.get(`${url}/workplans/pending/${loggedInUser.userID}`);
       setWorkplans(response.data);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching workplan status:", error);
     }
@@ -114,23 +117,23 @@ function WorkplanStatus() {
 
           {workplans.length === 0 ? (
             <div className="text-center alert alert-dark flex justify-between align-center">
-              <h4 className="uppercase">no workplan found</h4>
-              <Link className="font-bold text-lg text-decoration-none capitalize" to="/create-workplan" title="Home">create new workplan</Link>
+              <h4 className="uppercase text-xs lg:text-lg">no workplan found</h4>
+              <Link className="font-bold text-xs lg:text-lg text-decoration-none capitalize" to="/create-workplan" title="Home">create new workplan</Link>
             </div>
           ) : (
 
+            
             <div>
-
               <div className="alert alert-dark flex justify-between align-center">
-                <h4 className="font-bold text-lg text-decoration-none capitalize">all workplan status for the week</h4>
-                <Link className="font-bold text-lg text-decoration-none capitalize" to="/create-workplan" title="Home">create new workplan</Link>
+                <h4 className="font-bold text-xs lg:text-lg text-decoration-none capitalize">workplan status</h4>
+                <Link className="font-bold text-xs lg:text-lg text-decoration-none capitalize" to="/create-workplan" title="Home">create new</Link>
               </div>
 
-              <div className="grid my-4 gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="grid my-4 gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                 {workplans.map((workplan) => (
-                  <div key={workplan.workplan_id} className="cursor-pointer ease-in-out duration-300 bg-gray-200 hover:bg-gray-500 hover:text-white rounded-lg">
+                  <div key={workplan.workplan_id} className="cursor-pointer ease-in-out duration-300 bg-gray-300 hover:bg-gray-500 hover:text-white rounded-lg">
                     <div
-                      className={`overflow-hidden text-center shadow-md rounded-lg p-6 border ${workplan.status === "Pending"
+                      className={`overflow-hidden text-center shadow-md rounded-lg p-4 border ${workplan.status === "Pending"
                         ? "border-red-500"
                         : workplan.status === "Approved"
                           ? "border-green-500"
@@ -140,32 +143,26 @@ function WorkplanStatus() {
                         }`}
                       onClick={() => openModal(workplan)}
                     >
-                      <h3 className="text-xl capitalize font-semibold">{workplan.workplan_day}</h3>
-                      <h5 className="text-xl font-light">{formatDate(workplan.workplan_date)}</h5>
+                      <h3 className="text-sm lg:text-lg capitalize font-semibold">{workplan.workplan_day}</h3>
+                      <h5 className="text-sm lg:text-lg font-light">{formatDate(workplan.workplan_date)}</h5>
 
                       <div className="flex justify-center items-center mt-4">
                         {workplan.status === "Pending" && (
-                          <span className="text-lg px-3 py-1 rounded-full bg-red-500 text-white flex items-center">
-                            <i className="fas fa-clock fa-spin mr-1"></i>
-                            {workplan.status}
+                          <span className="text-sm lg:text-lg px-3 py-1 rounded-full bg-red-500 text-white flex items-center">
+                            <i className="fas fa-clock fa-spin mr-1"></i>{workplan.status}
                           </span>
                         )}
                         {workplan.status === "Approved" && (
-                          <span className="text-lg px-3 py-1 rounded-full bg-green-500 text-white flex items-center">
-                            <i className="fas fa-thumbs-up mr-1"></i>
-                            {workplan.status}
+                          <span className="text-sm lg:text-lg px-3 py-1 rounded-full bg-green-500 text-white flex items-center">
+                            <i className="fas fa-thumbs-up mr-1"></i>{workplan.status}
                           </span>
                         )}
                         {workplan.status === "Declined" && (
-                          <span className="text-lg px-3 py-1 rounded-full bg-gray-500 text-white flex items-center">
-                            <i className="fas fa-ban mr-1"></i>
-                            {workplan.status}
+                          <span className="text-sm lg:text-lg px-3 py-1 rounded-full bg-gray-500 text-white flex items-center">
+                            <i className="fas fa-ban mr-1"></i>{workplan.status}
                           </span>
                         )}
                       </div>
-
-
-
                     </div>
                   </div>
                 ))}
@@ -181,14 +178,14 @@ function WorkplanStatus() {
 
       {selectedWorkplan && (
         <div className="inset-0 z-10 flex items-center justify-center bg-opacity-50 my-5 mx-auto">
-          <div className="bg-slate-400 p-2 rounded-lg container">
-            <h1 className="text-2xl text-center text-red-900 uppercase">
+          <div className="bg-slate-300 p-2 rounded-lg container">
+            <h1 className="text-sm lg:text-xl text-center text-red-900 uppercase">
               details of {selectedWorkplan.title}
             </h1>
 
             <div className="row p-2">
 
-              <div className="col-3">
+              <div className="col-6 col-lg-3">
                 <p className="alert alert-light text-sm text-gray-500">
                   <span className="font-semibold">Status:</span>{" "}
                   {selectedWorkplan.status}
@@ -197,7 +194,7 @@ function WorkplanStatus() {
 
 
 
-              <div className="col-3">
+              <div className="col-6 col-lg-3">
                 <p className="alert alert-light text-sm text-gray-500">
                   <span className="font-semibold">Authorizer:</span>{" "}
                   <span className="capitalize">{selectedWorkplan.authorizer_fullname}</span>
@@ -206,14 +203,14 @@ function WorkplanStatus() {
 
 
 
-              <div className="col-3">
+              <div className="col-6 col-lg-3">
                 <p className="alert alert-light text-sm text-gray-500">
                   <span className="font-semibold">Day:</span>{" "}
                   {selectedWorkplan.workplan_day}
                 </p>
               </div>
 
-              <div className="col-3">
+              <div className="col-6 col-lg-3">
                 <p className="alert alert-light text-sm text-gray-500">
                   <span className="font-semibold">Date:</span>{" "}
                   <Moment format="YYYY/MM/DD">
@@ -223,35 +220,33 @@ function WorkplanStatus() {
               </div>
 
 
-              <div className="col-3">
+              <div className="col-6 col-lg-3">
                 <p className="alert alert-light text-sm text-gray-500">
-
                   {selectedWorkplan.status === 'Approved' ?
-                    <span className="font-semibold">Approval Date:
-                      <span><Moment format="YYYY/MM/DD">{selectedWorkplan.approval_date}</Moment></span>
+                    <span className="font-semibold">Approval Date: {" "}
+                      <span className="font-light"><Moment format="YYYY/MM/DD">{selectedWorkplan.approval_date}</Moment></span>
                     </span> :
-                    <span className="font-semibold">Decline reason:
-                      <span>{selectedWorkplan.decline_reason}</span>
+                    <span className="font-semibold">Decline reason: {" "}
+                      <span className="font-light">{selectedWorkplan.decline_reason}</span>
                     </span>}
-
                 </p>
               </div>
 
-              <div className="col-3">
+              <div className="col-6 col-lg-3">
                 <p className="alert alert-light text-sm text-gray-500">
                   <span className="font-semibold">Location:</span>{" "}
                   {selectedWorkplan.location}
                 </p>
               </div>
 
-              <div className="col-3">
+              <div className="col-6 col-lg-3">
                 <p className="alert alert-light text-sm text-gray-500">
                   <span className="font-semibold">Departure Time:</span>{" "}
                   {selectedWorkplan.departure_time}
                 </p>
               </div>
 
-              <div className="col-3">
+              <div className="col-6 col-lg-3">
                 <p className="alert alert-light text-sm text-gray-500">
                   <span className="font-semibold">Logistic Required:</span>{" "}
                   {selectedWorkplan.logistic}
@@ -260,13 +255,13 @@ function WorkplanStatus() {
 
               <div className="col-12">
                 <p className="alert alert-light text-sm text-gray-500">
-                  <p className="font-semibold">description:</p>{" "}
+                  <p className="font-semibold">Description:</p>{" "}
                   <p>{selectedWorkplan.description}</p>
                 </p>
               </div>
 
               <div className="col-12 my-0 py-0">
-                <p className="text-light">
+                <p className="text-danger text-sm">
                   <i className="fa-solid fa-triangle-exclamation"></i> Please note: Approved workplans cannot be removed.
                 </p>
               </div>
@@ -276,7 +271,7 @@ function WorkplanStatus() {
 
               <div className="col-12 flex justify-between">
 
-                <button className="btn btn-primary bg-blue-500 text-white rounded hover:bg-blue-600" onClick={closeModal}>
+                <button className="btn btn-sm btn-primary bg-blue-500 text-white rounded hover:bg-blue-600" onClick={closeModal}>
                   <i className="fa-solid fa-xmark"></i> Close
                 </button>
 
@@ -284,7 +279,7 @@ function WorkplanStatus() {
                 {/* Button to delete workplan */}
                 {selectedWorkplan.status !== 'Approved' && (
                   <div>
-                    <button className="btn btn-danger bg-red-500 text-white rounded hover:bg-red-600 mr-2" onClick={handleDelete}>
+                    <button className="btn btn-sm btn-danger bg-red-500 text-white rounded hover:bg-red-600 mr-2" onClick={handleDelete}>
                       <i className="fa-solid fa-trash-alt"></i> Delete
                     </button>
                   </div>

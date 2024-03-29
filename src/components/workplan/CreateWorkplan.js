@@ -212,11 +212,11 @@ function CreateWorkplan() {
       {!isFormOpen ? (
         <div className="container p-0 sm:mx-10 md:mx-10 mt-10">
 
-          <div className="alert alert-dark shadow-xl text-dark">
+          <div className="alert alert-dark shadow-xl text-dark d-none d-lg-block">
 
             <div className='flex justify-between'>
               <h4 className="font-bold text-lg">Creating a Weekly Workplan</h4>
-              <Link className="font-bold text-lg text-decoration-none capitalize" to="/workplan-status" title="Home">view workplan status</Link>
+              <Link className="font-bold text-lg text-decoration-none capitalize" to="/workplan-status" title="Home">workplan status</Link>
             </div>
 
             <ul className="list-disc pl-4 mt-2">
@@ -232,25 +232,34 @@ function CreateWorkplan() {
 
 
           {isLoading ? (
-            <div>Loading workplan days...</div>
+            <div className='container text-center'>Loading workplan days...</div>
           ) : (
-            <div className={`row`}>
 
-              {['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-                .filter(day => !workplanDays.includes(day.toLowerCase()))
-                .map((day, index) => (
+            <div className='container'>
 
-                  <div key={index} className={`hover:bg-red-900 col hover:text-white ease-in-out duration-300 hover:p-5 rounded-lg text-center shadow-lg p-3 m-3 cursor-pointer bg-slate-300`} onClick={() => handleDayClick(day)} >
-                    <div className="flex flex-col items-center justify-center p-2 h-full align-center">
-                      <h2 className="text-lg p-0 m-0 font-semibold capitalize">{day}</h2>
-                      <p className="p-0 m-0">{generateDateForDay(day)}</p>
+              <div className="alert alert-dark sm:flex d-flex d-lg-none justify-between align-center lg:hidden">
+                <h4 className="font-bold text-xs lg:text-lg text-decoration-none capitalize">Create Workplan</h4>
+                <Link className="font-bold text-xs lg:text-lg text-decoration-none capitalize" to="/workplan-status" title="Home">workplan status</Link>
+              </div>
+
+
+
+              <div className='row'>
+                {['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+                  .filter(day => !workplanDays.includes(day.toLowerCase()))
+                  .map((day, index) => (
+
+                    <div key={index} className={`col-4 col-lg-3`} onClick={() => handleDayClick(day)} >
+                      <div className="flex flex-col items-center justify-center p-2 my-2 rounded align-center hover:bg-red-900 hover:text-white  bg-slate-300">
+                        <h2 className="text-sm lg:text-xl font-semibold capitalize">{day}</h2>
+                        <p className="text-xs lg:text-xl text-center">{generateDateForDay(day)}</p>
+                      </div>
                     </div>
-                  </div>
 
-                ))}
-
-
+                  ))}
+              </div>
             </div>
+
           )}
         </div>
       ) : (

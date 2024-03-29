@@ -156,7 +156,6 @@ function StateWorkplan() {
   // console.log(workplanCollate);
 
   const excludedKeys = ['workplan_id', 'workplan_day', 'status', 'title', 'is_unit', 'is_srt', 'is_dept', 'creation_date', 'workplan_week_id', 'vehicle_id', 'assigned_pilot_id', 'approval_date', 'decline_date', 'decline_reason', 'implementing_team_id', 'user_unit', 'authorizer']
-
   // Calculate the total number of workplans
   const totalWorkplans = Object.values(groupedWorkplans).reduce((total, tasks) => total + tasks.length, 0);
 
@@ -164,13 +163,14 @@ function StateWorkplan() {
     <DefaultLayout pageTitle="approved state Weekly Workplan">
 
       <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
-      <div className="container w-full mx-auto mt-10">
+      <div className="container-fluid mx-auto mt-10">
+
         <div className="alert alert-dark flex justify-between align-center">
-          <h5 className="capitalize hidden lg:block">Activities: <span className='badge bg-red-800 text-2xl'>{totalWorkplans}</span> </h5>
-          <h5 className="capitalize hidden lg:block">state: <span className='badge bg-red-800 text-2xl'>Abia</span></h5> 
-          <h5 className="capitalize hidden lg:block">week: <span className='badge bg-red-800 text-2xl'>21</span></h5> 
-          <h5 className="capitalize hidden lg:block">Fiscal year: <span className='badge bg-red-800 text-2xl'>2024 (Q3)</span></h5> 
-          <h5 className="capitalize hidden lg:flex"><Link className="font-bold text-decoration-none mb-0" to="/dashboard" title="Home"> dashboard</Link></h5>
+          <h5 className="capitalize text-sm lg:text-lg">Activities: <span className='badge bg-red-800 text-sm'>{totalWorkplans}</span> </h5>
+          <h5 className="capitalize text-sm lg:text-lg hidden lg:block">state: <span className='badge bg-red-800 text-sm'>Abia</span></h5> 
+          <h5 className="capitalize text-sm lg:text-lg hidden lg:block">week: <span className='badge bg-red-800 text-sm'>21</span></h5> 
+          <h5 className="capitalize text-sm lg:text-lg hidden lg:block">Fiscal year: <span className='badge bg-red-800 text-sm'>2024 (Q3)</span></h5> 
+          <h5 className="capitalize text-sm lg:text-lg"><Link className="font-bold text-decoration-none mb-0" to="/dashboard" title="Home"> dashboard</Link></h5>
         </div>
 
         <Accordion defaultActiveKey="0">

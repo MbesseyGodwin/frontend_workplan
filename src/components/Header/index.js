@@ -38,8 +38,8 @@ const Header = ({ sidebarOpen, setSidebarOpen, pageTitle, loggedInUser }) => {
         {/* Logo and Brand */}
         <div className='text-center flex flex-col items-center pb-0 mb-0'>
           <Link className="text-center text-decoration-none" to="/dashboard" title="Home">
-            <img src={caritaslogo} className='rounded-full border border-danger m-auto' alt='profile' style={{ "width": "50px" }} />
-            <p className="text-lg uppercase text-white">caritas nigeria</p>
+            <img src={caritaslogo} className='w-6 lg:w-10 rounded-full border border-danger m-auto' alt='profile' />
+            <p className="text-xs lg:text-lg uppercase text-white">caritas nigeria</p>
           </Link>
         </div>
   
@@ -51,8 +51,8 @@ const Header = ({ sidebarOpen, setSidebarOpen, pageTitle, loggedInUser }) => {
         {/* User Information */}
         <div className='text-center pb-0 mb-0'>
           <Link className="text-center text-white text-decoration-none hover:text-red-900" to="/settings" title="Account">
-          <h1 className='text-lg p-0 m-0'>{`${loggedInUser.fName} ${loggedInUser.lName}`}</h1>
-          <p className='text-sm p-0 m-0'>{`${loggedInUser.email}`}</p>
+          <h1 className='text-xs lg:text-lg p-0 m-0'>{`${loggedInUser.fName} ${loggedInUser.lName}`}</h1>
+          <p className='text-xs lg:text-lg p-0 m-0'>{`${loggedInUser.email}`}</p>
           </Link>
         </div>
   

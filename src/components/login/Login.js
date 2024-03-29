@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -42,7 +42,11 @@ const Login = () => {
     }
   };
 
-  clearStorageAndCookies();
+  useEffect(() => {
+    clearStorageAndCookies();
+    console.log('stores are all cleared');
+  }, [])
+  
   
 
   const handleInputChange = (e, type) => {
@@ -104,16 +108,16 @@ const Login = () => {
       <div className="flex justify-center items-center h-screen">
         <div className="login-card">
           <div className="bg-white m-sm-5 m-md-5 mx-md-5 mx-sm-0 p-4 rounded-lg strong-shadow z-10">
-            <div className="w-full">
-              <h1 className="text-3xl alert alert-light text-danger bg-white text-center border-0 uppercase">workplan management system</h1>
+            <div className="">
+              <h6 className="sm:text-sm xs:text-sm lg:text-2xl text-danger bg-white text-center border-0 uppercase">workplan management system</h6>
               <form onSubmit={showPasswordInput ? handleUserLogin : handleContinue}>
 
 
                 <div className="form-group" style={{ display: showPasswordInput ? 'none' : 'block' }}>
                   <label className='text-xl fw-bold pb-1' htmlFor="email">Email</label>
                   <div className='flex'>
-                    <div className='text-3xl px-4 py-3 mb-6 rounded rounded-end-0 border border-dark shadow-sm'><i className="fa-regular fa-envelope"></i></div>
-                    <input required type="email" placeholder="Email" value={email} onChange={e => handleInputChange(e, 'email')} className="w-full text-2xl px-4 py-3 mb-6 rounded rounded-start-0 border border-dark shadow-sm" />
+                    <div className='text-xl p-2 mb-6 rounded rounded-end-0 border border-dark shadow-sm'><i className="fa-regular fa-envelope"></i></div>
+                    <input required type="email" placeholder="Email" value={email} onChange={e => handleInputChange(e, 'email')} className="form-control p-2 mb-6 rounded rounded-start-0 border border-dark shadow-sm" />
                   </div>
                 </div>
 
@@ -122,8 +126,8 @@ const Login = () => {
                   <div className="form-group">
                     <label className='text-xl fw-bold pb-1' htmlFor="password">Password</label>
                     <div className='flex'>
-                      <div className='text-3xl px-4 py-3 mb-6 rounded rounded-end-0 border border-dark shadow-sm'><i className="fa-solid fa-unlock-keyhole"></i></div>
-                      <input required type="password" placeholder="Password" value={password} onChange={e => handleInputChange(e, 'password')} className="w-full text-2xl px-4 py-3 mb-6 rounded rounded-start-0  border border-dark shadow-sm" />
+                      <div className='text-xl p-2 mb-6 rounded rounded-end-0 border border-dark shadow-sm'><i className="fa-solid fa-unlock-keyhole"></i></div>
+                      <input required type="password" placeholder="Password" value={password} onChange={e => handleInputChange(e, 'password')} className="form-control px-2 py-2 mb-6 rounded rounded-start-0  border border-dark shadow-sm" />
                     </div>
                   </div>
                 )}
@@ -132,14 +136,14 @@ const Login = () => {
                 <div className="d-flex justify-between">
                   {showPasswordInput && (
                     <>
-                      <button type="button" className="w-60 text-2xl bg-black text-white px-4 py-3 rounded hover:bg-gray-500" onClick={goBackToEmail}>Back</button>
-                      <button type="submit" className="w-60 text-2xl bg-red-700 text-white px-4 py-3 rounded hover:bg-red-900" disabled={loading}>{loading ? <i className="fa-solid fa-beat fa-sm text-sm">Validating</i> : <span>Sign In</span>}</button>
+                      <button type="button" className="bg-black text-white p-2 rounded hover:bg-gray-500" onClick={goBackToEmail}>Return</button>
+                      <button type="submit" className="bg-red-700 text-white p-2 rounded hover:bg-red-900" disabled={loading}>{loading ? <i className="fa-solid fa-fade fa-sm text-xs capitalize small">Validating</i> : <span>Sign In</span>}</button>
                     </>
                   )}
                   {!showPasswordInput && (
                     <button
                       type="submit"
-                      className={`w-100 text-2xl px-4 py-3 rounded hover:bg-red-400 ${email === "" ? "bg-gray-400 text-gray-700 cursor-not-allowed" : "bg-black text-white"}`}
+                      className={`col-12 p-2 rounded hover:bg-red-400 ${email === "" ? "bg-gray-400 text-gray-700 cursor-not-allowed" : "bg-black text-white"}`}
                       onClick={handleContinue}
                       disabled={email === ""}
                     >

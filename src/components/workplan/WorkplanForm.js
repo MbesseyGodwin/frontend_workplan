@@ -307,16 +307,16 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
 
   return (
-    <div className="bg-slate-400 container mx-auto px-3 pt-3 mt-4 rounded-lg shadow-md">
-      <h1 className="text-xl font-semibold mb-3 capitalize underline">Create Workplan for {day}</h1>
+    <div className="bg-slate-400 container mx-auto px-3 pt-3 mt-4 mb-5 rounded-lg shadow-md">
+      <h1 className="text-sm lg:text-lg font-semibold mb-3 capitalize underline">Create Workplan</h1>
 
       <form onSubmit={handleSubmit}>
         <div className='row'>
 
 
           {/* Input for workplan type */}
-          <div className="form-group col-3 mb-3">
-            <label htmlFor="workplan_type" className='block text-gray-700 font-semibold text-sm uppercase'>Workplan Type: </label>
+          <div className="col-6 col-lg-3 mb-3">
+            <label htmlFor="workplan_type" className='block text-gray-700 font-semibold text-sm capitalize'>Workplan Type: </label>
             <select
               className="form-control shadow-none form-input w-full border border-dark"
               required
@@ -333,44 +333,44 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
 
           {/* Input for workplan day */}
-          <div className="col-3 mb-3">
-            <label htmlFor="task" className="block text-gray-700 font-semibold text-sm uppercase">Workplan Day:</label>
+          <div className="col-6 col-lg-3 mb-3">
+            <label htmlFor="task" className="block text-gray-700 font-semibold text-sm capitalize">Workplan Day:</label>
             <input type="text" id="" name="" readOnly value={workplanData.workplan_day} onChange={handleChange} className="form-control lowercase shadow-none form-input w-full border border-dark" />
           </div>
 
 
           {/* Input for user id */}
-          {/* <div className="col-3 mb-3">
-            <label htmlFor="userID" className="block text-gray-700 font-semibold text-sm uppercase">user id:</label>
+          {/* <div className="col-6 col-lg-3 mb-3">
+            <label htmlFor="userID" className="block text-gray-700 font-semibold text-sm capitalize">user id:</label>
             <input type="text" id="" name="" readOnly value={workplanData.user_id} onChange={handleChange} className="form-control lowercase shadow-none form-input w-full border border-dark" />
           </div> */}
 
 
           {/* Input for workplan date */}
-          <div className="col-3 mb-3">
-            <label htmlFor="" className="block text-gray-700 font-semibold text-sm uppercase">Workplan Date:</label>
+          <div className="col-6 col-lg-3 mb-3">
+            <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Workplan Date:</label>
             <input type="text" id="" name="" readOnly required value={workplanData.workplan_date} onChange={handleChange} className="form-control shadow-none form-input w-full border border-dark" />
           </div>
 
 
           {/* Input for destination */}
-          <div className="col-3 mb-3">
-            <label htmlFor="" className="block text-gray-700 font-semibold text-sm uppercase">Destination:</label>
+          <div className="col-6 col-lg-3 mb-3">
+            <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Destination:</label>
             <input type="text" id="destination" autoComplete='off' name="destination" required value={workplanData.destination} onChange={handleChange} className="form-control shadow-none form-input w-full border border-dark" />
           </div>
 
 
           {/* Input for location */}
-          <div className="col-3 mb-3">
-            <label htmlFor="" className="block text-gray-700 font-semibold text-sm uppercase">Location:</label>
+          <div className="col-6 col-lg-3 mb-3">
+            <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Location:</label>
             <input type="text" id="location" name="location" required value={workplanData.location} onChange={handleChange} className="form-control shadow-none form-input w-full border border-dark" />
           </div>
 
 
 
           {/* Select for authorizer */}
-          <div className="col-3 mb-3">
-            <label htmlFor="authorizer" className="block text-gray-700 font-semibold text-sm uppercase">authorizer:</label>
+          <div className="col-6 col-lg-3 mb-3">
+            <label htmlFor="authorizer" className="block text-gray-700 font-semibold text-sm capitalize">authorizer:</label>
 
             <select
               id="authorizeBySelect"
@@ -388,8 +388,8 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
 
           {/* Input for departure time */}
-          <div className="col-3 mb-3">
-            <label htmlFor="" className="block text-gray-700 font-semibold text-sm uppercase">Departure Time:</label>
+          <div className="col-6 col-lg-3 mb-3">
+            <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Departure Time:</label>
             <input type='time' id="departure_time" name="departure_time" required value={workplanData.departure_time} onChange={handleChange} className="form-control shadow-none form-input w-full border border-dark" />
           </div>
 
@@ -397,8 +397,8 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
 
           {/* Input for logistic required */}
-          <div className="form-group col-3 mb-3">
-            <label htmlFor="logistic" className='block text-gray-700 font-semibold text-sm uppercase'>Logistic Required:</label>
+          <div className="col-6 col-lg-3 mb-3">
+            <label htmlFor="logistic" className='block text-gray-700 font-semibold text-sm capitalize'>Logistic Required:</label>
             
             <select
               className="form-control shadow-none form-input w-full border border-dark"
@@ -420,8 +420,8 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
 
           {/* MultiSelect component for selecting team members */}
-          <div className="form-group col-12 mb-3">
-            <label htmlFor="implementing_team" className="block text-gray-700 font-semibold text-sm uppercase">Implementing Team:</label>
+          <div className="col-12 mb-3">
+            <label htmlFor="implementing_team" className="block text-gray-700 font-semibold text-sm capitalize">Implementing Team:</label>
             <MultiSelect
               options={options}
               value={selectedTeam}
@@ -453,7 +453,7 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
 
           <div className="col-12 mb-3">
-            <label htmlFor="" className="block text-gray-700 font-semibold text-sm uppercase">Task Description:</label>
+            <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Task Description:</label>
             <textarea
               rows={10}
               cols={5}
@@ -466,7 +466,7 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
 
           {/* <div className="col-12 mb-3">
-            <label htmlFor="description" className="block text-gray-700 font-semibold text-sm uppercase">Task Description:</label>
+            <label htmlFor="description" className="block text-gray-700 font-semibold text-sm capitalize">Task Description:</label>
           
             <RichTextEditor value={workplanData.description} onChange={handleDescriptionChange} />
           </div> */}
@@ -476,8 +476,8 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
         <div className='flex justify-between mb-3'>
           {/* Submit button */}
-          <button type="submit" className="bg-blue-500 mb-3 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Submit</button>
-          <button type='button' className="bg-black mb-3 text-white font-semibold py-2 px-4 rounded-md" onClick={handleClose}>close</button>
+          <button type="submit" className="bg-blue-500 mb-3 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Save</button>
+          <button type='button' className="bg-black mb-3 text-white font-semibold py-2 px-4 rounded-md" onClick={handleClose}>Close</button>
 
         </div>
       </form>
