@@ -16,6 +16,35 @@ const Login = () => {
   const navigate = useNavigate();
   const { REACT_APP_AXIOS_URL: url } = process.env;
 
+  function removeCookie(cookieName) {
+    // Set the expiration date to a past date
+    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  }
+  
+  // Call the function to remove the "favorite-color" cookie
+  removeCookie('refreshToken');
+  
+
+  const clearStorageAndCookies = () => {
+    // Clear localStorage
+    localStorage.clear();
+  
+    // Clear sessionStorage
+    sessionStorage.clear();
+  
+    // Clear cookies
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const eqPos = cookie.indexOf('=');
+      const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
+      document.cookie = name + '=;expires=Thu, 01 Jan 2070 00:00:00 GMT;path=/';
+    }
+  };
+
+  clearStorageAndCookies();
+  
+
   const handleInputChange = (e, type) => {
     if (type === 'email') return setEmail(e.target.value);
     if (type === 'password') return setPassword(e.target.value);

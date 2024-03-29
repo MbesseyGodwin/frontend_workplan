@@ -27,46 +27,6 @@ import AssignVehicle from './components/requests/AssignVehicle';
 
 
 const App = () => {
-
-  useEffect(() => {
-    const checkRefreshToken = async () => {
-      // Check localStorage for the refresh token
-      let refreshToken = localStorage.getItem('refreshToken');
-
-      // If refresh token is not found in localStorage, check cookies
-      if (!refreshToken) {
-        // Check cookies for the refresh token
-        refreshToken = Cookies.get('refreshToken');
-        
-        // Redirect user to the login page if refresh token is empty
-        if (!refreshToken) {
-          window.location('./')
-          return;
-        }
-      }
-
-      // // If refresh token is found, you may want to validate it
-      // try {
-      //   // Send a request to the server to validate the refresh token
-      //   await axios.get('/validate-refresh-token', {
-      //     headers: {
-      //       Authorization: `Bearer ${refreshToken}`
-      //     }
-      //   });
-      //   // If the refresh token is valid, do nothing
-      // } catch (error) {
-      //   // If the refresh token is invalid or expired, redirect user to login page
-      //   navigate('/', { replace: true });
-      // }
-
-    };
-
-    checkRefreshToken();
-  }, []);
-
-
-
-
   const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
   return (
@@ -86,8 +46,8 @@ const App = () => {
         <Route path='/collate-workplan' element={<CollateWorkplan />} />
         <Route path='/assign-vehicle' element={<AssignVehicle />} />
 
-        {/* Conditionally render the ManageUser route based on roleID */}
-        {loggedInUser.roleID === 1 && (
+        {/* Conditionally render the ManageUser route based on roleID if loggedInUser exists */}
+        {loggedInUser && loggedInUser.roleID === 1 && (
           <Route path='/manage-users' element={<ManageUser />} />
         )}
 
