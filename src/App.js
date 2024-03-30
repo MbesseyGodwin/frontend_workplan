@@ -1,84 +1,64 @@
-// ./frontend/src/App.js
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Cookies from 'js-cookie'; // Import js-cookie library
 
-// import './App.css';
 import "./index.css";
 
-// import Navbar from './components/navbar/Navbar';
-import Dashboard from './components/dashboard/Dashboard';
-import Signup from './components/signup/Signup';
-import Login from './components/login/Login';
-import CreateWorkplan from './components/workplan/CreateWorkplan';
-import StateWorkplan from './components/workplan/StateWorkplan';
-import WorkplanStatus from './components/workplan/WorkplanStatus';
-import ReportHistory from './components/report/ReportHistory';
-import UploadReport from './components/report/UploadReport';
-import ManageUser from './components/users/Manageuser';
-import Setting from './components/settings/Setting';
-import VisitSummary from './components/visits/VisitSummary';
-import jwtDecode from 'jwt-decode';
-import ApproveRequest from './components/requests/ApproveRequest';
-import CollateWorkplan from './components/requests/CollateWorkplan';
-import AssignVehicle from './components/requests/AssignVehicle';
-
-
+const Login = lazy(() => import('./components/login/Login'));
+const Signup = lazy(() => import('./components/signup/Signup'));
+const Dashboard = lazy(() => import('./components/dashboard/Dashboard'));
+const CreateWorkplan = lazy(() => import('./components/workplan/CreateWorkplan'));
+const StateWorkplan = lazy(() => import('./components/workplan/StateWorkplan'));
+const WorkplanStatus = lazy(() => import('./components/workplan/WorkplanStatus'));
+const ReportHistory = lazy(() => import('./components/report/ReportHistory'));
+const UploadReport = lazy(() => import('./components/report/UploadReport'));
+const ManageUser = lazy(() => import('./components/users/Manageuser'));
+const Setting = lazy(() => import('./components/settings/Setting'));
+const VisitSummary = lazy(() => import('./components/visits/VisitSummary'));
+const ApproveRequest = lazy(() => import('./components/requests/ApproveRequest'));
+const CollateWorkplan = lazy(() => import('./components/requests/CollateWorkplan'));
+const AssignVehicle = lazy(() => import('./components/requests/AssignVehicle'));
 
 const App = () => {
+  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
-// const accessToken = localStorage.getItem('accessToken');
-const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
-
-const checkAccessTokenInCookies = () => {
-  // Check if access token exists in cookies
-  const accessTokenFromCookies = Cookies.get('accessToken');
-
-  // If access token not found in cookies
-  if (!accessTokenFromCookies) {
-    // Retrieve access token from local storage
-    const accessTokenFromLocalStorage = localStorage.getItem('accessToken');
-
-    // If access token exists in local storage
-    if (accessTokenFromLocalStorage) {
-      // Save access token in cookies
-      Cookies.set('accessToken', accessTokenFromLocalStorage, { expires: 7 }); // Example: Expires in 7 days
+  const checkAccessTokenInCookies = () => {
+    const accessTokenFromCookies = Cookies.get('accessToken');
+    if (!accessTokenFromCookies) {
+      const accessTokenFromLocalStorage = localStorage.getItem('accessToken');
+      if (accessTokenFromLocalStorage) {
+        Cookies.set('accessToken', accessTokenFromLocalStorage, { expires: 7 });
+      }
     }
-  }
-};
+  };
 
-// Call the function when the app component mounts
-useEffect(() => {
-  checkAccessTokenInCookies();
-}, []);
-
-
-  // console.log(accessToken);
+  useEffect(() => {
+    checkAccessTokenInCookies();
+  }, []);
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/dashboard/*' element={<Dashboard />} />
-        <Route path='/create-workplan' element={<CreateWorkplan />} />
-        <Route path='/state-workplan' element={<StateWorkplan />} />
-        <Route path='/workplan-status' element={<WorkplanStatus />} />
-        <Route path='/upload-report' element={<UploadReport />} />
-        <Route path='/report-history' element={<ReportHistory />} />
-        <Route path='/visit-summary' element={<VisitSummary />} />
-        <Route path='/settings' element={<Setting />} />
-        <Route path='/approve-request' element={<ApproveRequest />} />
-        <Route path='/collate-workplan' element={<CollateWorkplan />} />
-        <Route path='/assign-vehicle' element={<AssignVehicle />} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/dashboard/*' element={<Dashboard />} />
+          <Route path='/create-workplan' element={<CreateWorkplan />} />
+          <Route path='/state-workplan' element={<StateWorkplan />} />
+          <Route path='/workplan-status' element={<WorkplanStatus />} />
+          <Route path='/upload-report' element={<UploadReport />} />
+          <Route path='/report-history' element={<ReportHistory />} />
+          <Route path='/visit-summary' element={<VisitSummary />} />
+          <Route path='/settings' element={<Setting />} />
+          <Route path='/approve-request' element={<ApproveRequest />} />
+          <Route path='/collate-workplan' element={<CollateWorkplan />} />
+          <Route path='/assign-vehicle' element={<AssignVehicle />} />
 
-        {/* Conditionally render the ManageUser route based on roleID if loggedInUser exists */}
-        {loggedInUser && loggedInUser.roleID === 1 && (
-          <Route path='/manage-users' element={<ManageUser />} />
-        )}
-
-      </Routes>
+          {loggedInUser && loggedInUser.roleID === 1 && (
+            <Route path='/manage-users' element={<ManageUser />} />
+          )}
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
