@@ -1,6 +1,6 @@
 // ./frontend/src/App.js
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'; // Import js-cookie library
 
@@ -27,7 +27,19 @@ import AssignVehicle from './components/requests/AssignVehicle';
 
 
 const App = () => {
-  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  useEffect(() => {
+    // Check if user is logged in
+    const userToken = localStorage.getItem('accessToken');
+    if (userToken) {
+      // Decode the token to get user information
+      const decodedToken = jwtDecode(userToken);
+      setLoggedInUser(decodedToken);
+    }
+  }, []);
+
+  // const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
   return (
     <BrowserRouter>
