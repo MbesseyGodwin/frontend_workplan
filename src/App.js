@@ -27,19 +27,34 @@ import AssignVehicle from './components/requests/AssignVehicle';
 
 
 const App = () => {
-  // const [loggedInUser, setLoggedInUser] = useState(null);
 
-  // useEffect(() => {
-  //   // Check if user is logged in
-  //   const userToken = localStorage.getItem('accessToken');
-  //   if (userToken) {
-  //     // Decode the token to get user information
-  //     const decodedToken = jwtDecode(userToken);
-  //     setLoggedInUser(decodedToken);
-  //   }
-  // }, []);
+// const accessToken = localStorage.getItem('accessToken');
+const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
-  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+const checkAccessTokenInCookies = () => {
+  // Check if access token exists in cookies
+  const accessTokenFromCookies = Cookies.get('accessToken');
+
+  // If access token not found in cookies
+  if (!accessTokenFromCookies) {
+    // Retrieve access token from local storage
+    const accessTokenFromLocalStorage = localStorage.getItem('accessToken');
+
+    // If access token exists in local storage
+    if (accessTokenFromLocalStorage) {
+      // Save access token in cookies
+      Cookies.set('accessToken', accessTokenFromLocalStorage, { expires: 7 }); // Example: Expires in 7 days
+    }
+  }
+};
+
+// Call the function when the app component mounts
+useEffect(() => {
+  checkAccessTokenInCookies();
+}, []);
+
+
+  // console.log(accessToken);
 
   return (
     <BrowserRouter>
