@@ -27,19 +27,19 @@ import AssignVehicle from './components/requests/AssignVehicle';
 
 
 const App = () => {
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  // const [loggedInUser, setLoggedInUser] = useState(null);
 
-  useEffect(() => {
-    // Check if user is logged in
-    const userToken = localStorage.getItem('accessToken');
-    if (userToken) {
-      // Decode the token to get user information
-      const decodedToken = jwtDecode(userToken);
-      setLoggedInUser(decodedToken);
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Check if user is logged in
+  //   const userToken = localStorage.getItem('accessToken');
+  //   if (userToken) {
+  //     // Decode the token to get user information
+  //     const decodedToken = jwtDecode(userToken);
+  //     setLoggedInUser(decodedToken);
+  //   }
+  // }, []);
 
-  // const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
   return (
     <BrowserRouter>
