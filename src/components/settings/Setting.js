@@ -25,13 +25,12 @@ function Setting() {
 
   return (
 
-
     <DefaultLayout pageTitle="Account and Settings">
       <div className="container align-center mt-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {/* User Profile Settings */}
           <SettingCard
-            title="User Profile Settings"
+            title="Profile Settings"
             description="Edit your personal information, change your password, update your profile picture, and manage your preferences."
             icon={faUser}
           />
@@ -57,19 +56,6 @@ function Setting() {
             icon={faShieldAlt}
           />
 
-          {/* Appearance Settings */}
-          <SettingCard
-            title="Appearance Settings"
-            description="Customize the look and feel of the application. Choose your preferred theme, font size, color scheme, and layout options."
-            icon={faPalette}
-          />
-
-          {/* Other Settings */}
-          <SettingCard
-            title="Other Settings"
-            description="Explore additional settings options such as language preferences, data export, and integrations with other applications."
-            icon={faCog}
-          />
         </div>
       </div>
     </DefaultLayout>

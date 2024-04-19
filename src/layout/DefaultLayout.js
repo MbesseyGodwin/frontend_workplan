@@ -5,7 +5,7 @@ import Header from '../components/Header/index';
 const DefaultLayout = ({ children, pageTitle }) => {
   // State variables
   const [sidebarOpen, setSidebarOpen] = useState(false); // State for controlling sidebar visibility
-  const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
   // console.log(loggedInUser);
 
   return (

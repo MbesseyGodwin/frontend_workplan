@@ -107,10 +107,14 @@ const DayAccordion = ({ day, tasks, excludedKeys, onApprove }) => {
         }));
     };
 
+
+
+    
     return (
-        <Accordion.Item className='shadow-none rounded-none' eventKey={day}>
+        // i removed eventKey={day} from the Accordion.Item, this will enable francis to open multiple accordion at once. so that he can see every request at once
+        <Accordion.Item className='shadow-none rounded-none'> 
             <Accordion.Header className='border border-dark shadow-none'>{day}</Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Body className='border border-dark shadow-none'>
                 {/* Map through tasks grouped by user_unit */}
                 {Object.entries(groupedByUserUnit).map(([unit, unitTasks], unitIndex) => {
                     // Calculate the total number of workplans for the current unit
@@ -145,7 +149,7 @@ const DayAccordion = ({ day, tasks, excludedKeys, onApprove }) => {
                                                             <select
                                                                 value={inputValues[task.workplan_id]?.[key] || value}
                                                                 onChange={(e) => handleInputChange(task.workplan_id, key, e.target.value)}
-                                                                className="form-control shadow-none form-input w-full border border-dark"
+                                                                className="block w-full p-1 border border-black rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                                             >
                                                                 {/* Map over options and generate <option> elements */}
                                                                 {key === 'vehicle_name' ? (
@@ -167,7 +171,7 @@ const DayAccordion = ({ day, tasks, excludedKeys, onApprove }) => {
 
                                             {/* Add a button to approve the workplan and allocate vehicle */}
                                             <td className='text-xs'>
-                                                <button className='btn btn-success btn-sm' onClick={() => approveAndAllocateVehicle(task.workplan_id, inputValues[task.workplan_id]?.vehicle_name || task.vehicle_name, inputValues[task.workplan_id]?.pilot_name || task.pilot_name)}>Assign</button>
+                                                <button className='btn small btn-success btn-sm' onClick={() => approveAndAllocateVehicle(task.workplan_id, inputValues[task.workplan_id]?.vehicle_name || task.vehicle_name, inputValues[task.workplan_id]?.pilot_name || task.pilot_name)}> <i className="fa-solid fa-truck"></i> Assign</button>
                                             </td>
                                         </tr>
                                     ))}
@@ -179,6 +183,10 @@ const DayAccordion = ({ day, tasks, excludedKeys, onApprove }) => {
             </Accordion.Body>
         </Accordion.Item>
     );
+
+
+
+
 };
 
 
@@ -221,7 +229,7 @@ function AssignVehicle() {
     }, {});
 
 
-    const excludedKeys = ['workplan_id', 'workplan_day', 'status', 'description', 'title', 'is_unit', 'is_srt', 'is_dept', 'creation_date', 'workplan_week_id', 'vehicle_id', 'assigned_pilot_id', 'approval_date', 'decline_date', 'decline_reason', 'implementing_team_id', 'user_unit']
+    const excludedKeys = ['user_id', 'workplan_id', 'workplan_day', 'status', 'description', 'title', 'is_unit', 'is_srt', 'is_dept', 'creation_date', 'workplan_week_id', 'vehicle_id', 'assigned_pilot_id', 'approval_date', 'decline_date', 'decline_reason', 'implementing_team_id', 'user_unit', 'workplan_week', 'workplan_quarter', 'report_status']
 
     // Calculate the total number of workplans
     const totalWorkplans = Object.values(groupedWorkplans).reduce((total, tasks) => total + tasks.length, 0);
@@ -230,11 +238,10 @@ function AssignVehicle() {
         <DefaultLayout pageTitle="Assign Vehicle and Pilot">
 
             <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
-            <div className="container w-full mx-auto mt-10">
+            <div className="container-fluid px-5 my-10">
                 <div className="alert alert-dark flex justify-between align-center">
                     {/* Display the total number of workplans */}
                     <h5 className="font-bold capitalize hidden lg:flex">Vehicle Requests: <span className='mx-1 badge bg-red-800 text-2xl'>{totalWorkplans}</span> </h5>
-                    <h5 className="font-bold capitalize text-xs">remember to implement api for vehicle and pilot assignment tomorrow</h5>
                     <h5 className="font-bold capitalize hidden lg:flex"><Link className="font-bold text-decoration-none mb-0" to="/dashboard" title="Home"> dashboard</Link></h5>
                 </div>
 

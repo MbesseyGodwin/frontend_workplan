@@ -118,15 +118,15 @@ function WorkplanStatus() {
           {workplans.length === 0 ? (
             <div className="text-center alert alert-dark flex justify-between align-center">
               <h4 className="uppercase text-xs lg:text-lg">no workplan found</h4>
-              <Link className="font-bold text-xs lg:text-lg text-decoration-none capitalize" to="/create-workplan" title="Home">create new workplan</Link>
+              <Link className="font-bold text-xs lg:text-lg text-decoration-none capitalize" to="/create-workplan" title="Home">create workplan</Link>
             </div>
           ) : (
 
-            
+
             <div>
               <div className="alert alert-dark flex justify-between align-center">
                 <h4 className="font-bold text-xs lg:text-lg text-decoration-none capitalize">workplan status</h4>
-                <Link className="font-bold text-xs lg:text-lg text-decoration-none capitalize" to="/create-workplan" title="Home">create new</Link>
+                <Link className="font-bold text-xs lg:text-lg text-decoration-none capitalize" to="/create-workplan" title="Home">create workplan</Link>
               </div>
 
               <div className="grid my-4 gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
@@ -158,7 +158,7 @@ function WorkplanStatus() {
                           </span>
                         )}
                         {workplan.status === "Declined" && (
-                          <span className="text-sm lg:text-lg px-3 py-1 rounded-full bg-gray-500 text-white flex items-center">
+                          <span className="text-sm lg:text-lg px-3 py-1 rounded-full bg-dark text-white flex items-center">
                             <i className="fas fa-ban mr-1"></i>{workplan.status}
                           </span>
                         )}
@@ -179,15 +179,15 @@ function WorkplanStatus() {
       {selectedWorkplan && (
         <div className="inset-0 z-10 flex items-center justify-center bg-opacity-50 my-5 mx-auto">
           <div className="bg-slate-300 p-2 rounded-lg container">
-            <h1 className="text-sm lg:text-xl text-center text-red-900 uppercase">
+            <h1 className="text-sm lg:text-lg text-center text-red-900 capitalize">
               details of {selectedWorkplan.title}
             </h1>
 
             <div className="row p-2">
 
               <div className="col-6 col-lg-3">
-                <p className="alert alert-light text-sm text-gray-500">
-                  <span className="font-semibold">Status:</span>{" "}
+                <p className="alert alert-light text-sm text-black">
+                  <p className="font-semibold mb-0">Status:</p>
                   {selectedWorkplan.status}
                 </p>
               </div>
@@ -195,24 +195,24 @@ function WorkplanStatus() {
 
 
               <div className="col-6 col-lg-3">
-                <p className="alert alert-light text-sm text-gray-500">
-                  <span className="font-semibold">Authorizer:</span>{" "}
-                  <span className="capitalize">{selectedWorkplan.authorizer_fullname}</span>
+                <p className="alert alert-light text-sm text-black">
+                  <p className="font-semibold mb-0">In progress with:</p>
+                  <p className="">{selectedWorkplan.authorizer_fullname}</p>
                 </p>
               </div>
 
 
 
               <div className="col-6 col-lg-3">
-                <p className="alert alert-light text-sm text-gray-500">
-                  <span className="font-semibold">Day:</span>{" "}
+                <p className="alert alert-light text-sm text-black">
+                  <p className="font-semibold mb-0">Day:</p>
                   {selectedWorkplan.workplan_day}
                 </p>
               </div>
 
               <div className="col-6 col-lg-3">
-                <p className="alert alert-light text-sm text-gray-500">
-                  <span className="font-semibold">Date:</span>{" "}
+                <p className="alert alert-light text-sm text-black">
+                  <p className="font-semibold mb-0">Date:</p>
                   <Moment format="YYYY/MM/DD">
                     {selectedWorkplan.workplan_date}
                   </Moment>
@@ -221,41 +221,41 @@ function WorkplanStatus() {
 
 
               <div className="col-6 col-lg-3">
-                <p className="alert alert-light text-sm text-gray-500">
+                <p className="alert alert-light text-sm text-black">
                   {selectedWorkplan.status === 'Approved' ?
-                    <span className="font-semibold">Approval Date: {" "}
-                      <span className="font-light"><Moment format="YYYY/MM/DD">{selectedWorkplan.approval_date}</Moment></span>
-                    </span> :
-                    <span className="font-semibold">Decline reason: {" "}
-                      <span className="font-light">{selectedWorkplan.decline_reason}</span>
-                    </span>}
+                    <p className="font-semibold mb-0">Approval Date: {" "}
+                      <p className="font-light"><Moment format="YYYY/MM/DD">{selectedWorkplan.approval_date}</Moment></p>
+                    </p> :
+                    <p className="font-semibold mb-0">Decline reason: {" "}
+                      <p className="font-light">{selectedWorkplan.decline_reason}</p>
+                    </p>}
                 </p>
               </div>
 
               <div className="col-6 col-lg-3">
-                <p className="alert alert-light text-sm text-gray-500">
-                  <span className="font-semibold">Location:</span>{" "}
+                <p className="alert alert-light text-sm text-black">
+                  <p className="font-semibold mb-0">Location:</p>
                   {selectedWorkplan.location}
                 </p>
               </div>
 
               <div className="col-6 col-lg-3">
-                <p className="alert alert-light text-sm text-gray-500">
-                  <span className="font-semibold">Departure Time:</span>{" "}
+                <p className="alert alert-light text-sm text-black">
+                  <p className="font-semibold mb-0">Departure Time:</p>
                   {selectedWorkplan.departure_time}
                 </p>
               </div>
 
               <div className="col-6 col-lg-3">
-                <p className="alert alert-light text-sm text-gray-500">
-                  <span className="font-semibold">Logistic Required:</span>{" "}
+                <p className="alert alert-light text-sm text-black">
+                  <p className="font-semibold mb-0">Logistic Required:</p>
                   {selectedWorkplan.logistic}
                 </p>
               </div>
 
               <div className="col-12">
-                <p className="alert alert-light text-sm text-gray-500">
-                  <p className="font-semibold">Description:</p>{" "}
+                <p className="alert alert-light text-sm text-black">
+                  <p className="font-semibold mb-0">Description:</p>
                   <p>{selectedWorkplan.description}</p>
                 </p>
               </div>

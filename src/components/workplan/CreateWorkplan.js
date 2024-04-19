@@ -25,6 +25,7 @@ function CreateWorkplan() {
 
   const axiosJWT = axios.create();
   const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  const weekAndQuarter = JSON.parse(sessionStorage.getItem('weekAndQuarter'));
 
   // Use useMemo to memoize the loginUser object
   const loginUser = useMemo(() => ({
@@ -164,7 +165,9 @@ function CreateWorkplan() {
         logistic: formData.logistic_required || 'no',
         implementingTeam: implementingTeam,
         authorizer: formData.authorizer,
-        user_unit: formData.user_unit
+        user_unit: formData.user_unit,
+        workplan_week: weekAndQuarter.week, 
+        workplan_quarter: weekAndQuarter.quarter, 
       });
 
       if (response.status === 201) {
@@ -185,10 +188,6 @@ function CreateWorkplan() {
     }
   };
 
-
-
-
-
   const handleClose = async () => {
     setIsFormOpen(false);
   };
@@ -203,6 +202,12 @@ function CreateWorkplan() {
     return nextDate.toDateString().substring(4); // Extract the date part from the full string
   };
 
+  const isWeekend = () => {
+    const dayOfWeek = new Date().getDay(); // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    return dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6; // Check if it's Sunday, Friday, or Saturday
+  };
+
+  // console.log(isWeekend());
 
   return (
     <DefaultLayout pageTitle="Create Workplan">
@@ -212,21 +217,24 @@ function CreateWorkplan() {
       {!isFormOpen ? (
         <div className="container p-0 sm:mx-10 md:mx-10 mt-10">
 
-          <div className="alert alert-dark shadow-xl text-dark d-none d-lg-block">
 
-            <div className='flex justify-between'>
-              <h4 className="font-bold text-lg">Creating a Weekly Workplan</h4>
-              <Link className="font-bold text-lg text-decoration-none capitalize" to="/workplan-status" title="Home">workplan status</Link>
+          {isWeekend() && (
+            <div className="alert alert-dark shadow-xl text-dark d-none d-lg-block">
+              <div className='flex justify-between'>
+                <h4 className="font-bold text-lg">Creating a Weekly Workplan</h4>
+                <Link className="font-bold text-lg text-decoration-none capitalize" to="/workplan-status" title="Home">workplan status</Link>
+              </div>
+
+              <ul className="list-disc pl-4 mt-2">
+                <li className="mb-1 text-black text-sm">To create a workplan for a specific day, click on the corresponding card.</li>
+                <li className="mb-1 text-black text-sm">Upon clicking a card, a dedicated workplan form will be presented.</li>
+                <li className="mb-1 text-black text-sm">Carefully fill out the required information within the workplan form.</li>
+                <li className="mb-1 text-black text-sm">Once completed and saved, the selected day will be removed from the list of available cards, indicating a workplan has been created for that day.</li>
+                <li className="mb-1 text-black text-sm">The authorizer will get an instant notifications prompting them to process your request.</li>
+              </ul>
             </div>
 
-            <ul className="list-disc pl-4 mt-2">
-              <li className="mb-1 text-sm">1: To create a workplan for a specific day, click on the corresponding card.</li>
-              <li className="mb-1 text-sm">2: Upon clicking a card, a dedicated workplan form will be presented.</li>
-              <li className="mb-1 text-sm">3: Carefully fill out the required information within the workplan form.</li>
-              <li className="mb-1 text-sm">4: Once completed and saved, the selected day will be removed from the list of available cards, indicating a workplan has been created for that day.</li>
-              <li className="mb-1 text-sm">5: The authorizer will get an instant notifications prompting them to process your request.</li>
-            </ul>
-          </div>
+          )}
 
 
 
@@ -235,29 +243,36 @@ function CreateWorkplan() {
             <div className='container text-center'>Loading workplan days...</div>
           ) : (
 
-            <div className='container'>
 
-              <div className="alert alert-dark sm:flex d-flex d-lg-none justify-between align-center lg:hidden">
-                <h4 className="font-bold text-xs lg:text-lg text-decoration-none capitalize">Create Workplan</h4>
-                <Link className="font-bold text-xs lg:text-lg text-decoration-none capitalize" to="/workplan-status" title="Home">workplan status</Link>
-              </div>
+            <div className='container p-0'>
+
+              {isWeekend() && (
+                <div className="alert alert-dark sm:flex d-flex d-lg-none justify-between align-center lg:hidden">
+                  <h4 className="font-bold text-xs lg:text-lg text-decoration-none capitalize">Create Workplan</h4>
+                  <Link className="font-bold text-xs lg:text-lg text-decoration-none capitalize" to="/workplan-status" title="Home">workplan status</Link>
+                </div>
+              )}
 
 
-
-              <div className='row'>
-                {['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-                  .filter(day => !workplanDays.includes(day.toLowerCase()))
-                  .map((day, index) => (
-
-                    <div key={index} className={`col-4 col-lg-3`} onClick={() => handleDayClick(day)} >
-                      <div className="flex flex-col items-center justify-center p-2 my-2 rounded align-center hover:bg-red-900 hover:text-white  bg-slate-300">
-                        <h2 className="text-sm lg:text-xl font-semibold capitalize">{day}</h2>
-                        <p className="text-xs lg:text-xl text-center">{generateDateForDay(day)}</p>
+              {isWeekend() ? (
+                <div className='row'>
+                  {['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+                    .filter(day => !workplanDays.includes(day.toLowerCase()))
+                    .map((day, index) => (
+                      <div key={index} className={`col-4 col-lg-3`} onClick={() => handleDayClick(day)} >
+                        <div className="flex flex-col items-center justify-center p-2 my-2 rounded align-center cursor-pointer hover:bg-green-900 hover:text-white  bg-slate-300">
+                          <h2 className="text-sm lg:text-xl font-semibold capitalize">{day}</h2>
+                          <p className="text-xs lg:text-xl text-center">{generateDateForDay(day)}</p>
+                        </div>
                       </div>
-                    </div>
-
-                  ))}
-              </div>
+                    ))}
+                </div>
+              ) : (
+                <div className="text-center flex justify-center flex-wrap alert alert-danger font-bold mt-5">
+                  {/* <p className='d-none d-sm-block m-0'><i className="fa-solid fa-triangle-exclamation fa-xl"></i></p> */}
+                  <p className="col-12 col-lg-6 m-0 text-xs lg:text-xl">Workplans cannot be created on active working days</p>
+                </div>
+              )}
             </div>
 
           )}
@@ -266,6 +281,8 @@ function CreateWorkplan() {
         <div className="d d-none"></div>
       )}
 
+<div className='container'>
+  
       {isFormOpen && (
         <WorkplanForm
           day={selectedDay}
@@ -276,6 +293,8 @@ function CreateWorkplan() {
         // formToggle={!isFormOpen}
         />
       )}
+
+</div>
 
     </DefaultLayout>
   );

@@ -1,163 +1,225 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import "./Login.css"
 import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import jwtDecode from 'jwt-decode';
 import caritaslogo from '../../assets/images/caritas-logo4.png';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPasswordInput, setShowPasswordInput] = useState(false);
-  const [loading, setLoading] = useState(false); // State to manage loading state
-  const [user, setUser] = useState('123');
-
+  const [username, setUsername] = useState('maondohemba@ccfng.org');
+  const [password, setPassword] = useState('strongpassword');
+  const [errorMessage, setErrorMessage] = useState(''); // More specific error message
   const navigate = useNavigate();
-  const { REACT_APP_AXIOS_URL: url } = process.env;
+  const [loading, setLoading] = useState(false); // State to track loading status
+  const [resetModalOpen, setResetModalOpen] = useState(false);
 
-  function removeCookie(cookieName) {
-    // Set the expiration date to a past date
-    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  }
-  
-  // Call the function to remove the "favorite-color" cookie
-  removeCookie('refreshToken');
-  
 
-  const clearStorageAndCookies = () => {
-    // Clear localStorage
-    localStorage.clear();
-  
-    // Clear sessionStorage
-    sessionStorage.clear();
-  
-    // Clear cookies
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i];
-      const eqPos = cookie.indexOf('=');
-      const name = eqPos > -1 ? cookie.substring(0, eqPos) : cookie;
-      document.cookie = name + '=;expires=Thu, 01 Jan 2070 00:00:00 GMT;path=/';
+  const handleInputChange = (e) => {
+    const { name, value } = e.target; // Destructuring for cleaner access
+    setUsername(name === 'username' ? value : username);
+    setPassword(name === 'password' ? value : password);
+  };
+
+
+
+  const handleUserLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true); // Set loading to true when sign-in process starts
+
+
+    try {
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('password', password);
+
+      const response = await axios.post(`http://0.0.0.0:8000/api/v1/token`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      if (response.status === 200 || response.status === 201) {
+
+        console.log("success");
+        console.log(response.data);
+
+        // Store access token in local storage
+        localStorage.setItem('accessToken', response.data.access_token);
+        // localStorage.setItem('refreshToken', response.data.refresh_token);
+
+        getUserInfo();
+
+        setTimeout(() => {
+          navigate('/dashboard', { replace: true });
+          setLoading(false); // Set loading to false after sign-in process completes
+        }, 2000);
+
+        setErrorMessage('');
+      } else {
+        setErrorMessage('Login failed. Please check your credentials.'); // Specific message
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setErrorMessage(error.response.data.message || 'Username or Password Invalid'); // Use API error message if available
+        setLoading(false); // Set loading to false after sign-in process completes
+      } else {
+        console.error('Login error:', error);
+        setErrorMessage('An unexpected error occurred. Please try again later.');
+        setLoading(false); // Set loading to false after sign-in process completes
+      }
+    }
+  };
+
+  const url = 'http://0.0.0.0:8000/api/v1'; // Assuming the base URL is constant
+
+  const getUserInfo = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken'); // Assuming access token is stored in local storage
+
+      if (!accessToken) {
+        // Handle missing access token (e.g., redirect to login)
+        navigate('/', { replace: true });
+        console.error('Access token not found');
+        return;
+      }
+
+      const response = await axios.get(`${url}/users/me`, {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+
+      if (response.status === 200) {
+        console.log('User data:', response.data);
+        localStorage.setItem('loggedInUser', JSON.stringify(response.data));
+      } else {
+        console.error('Error fetching user info:', response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching user info:', error);
     }
   };
 
   useEffect(() => {
-    clearStorageAndCookies();
-    console.log('stores are all cleared');
-  }, [])
-  
-  
+    getUserInfo();
+  }, []); // Empty dependency array ensures the effect runs only once on component mount
 
-  const handleInputChange = (e, type) => {
-    if (type === 'email') return setEmail(e.target.value);
-    if (type === 'password') return setPassword(e.target.value);
-  }
-
-  const handleContinue = (e) => {
-    e.preventDefault();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email || !email.match(emailRegex)) {
-      toast.error('Email address is not valid');
-      return;
-    }
-    setShowPasswordInput(true);
-  }
-
-  const goBackToEmail = () => {
-    setShowPasswordInput(false);
-    setPassword('');
-  }
-
-  const handleUserLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true); // Set loading state to true during login
+  const handleResetPassword = async () => {
     try {
-      const response = await axios.put(`${url}/login`, {
-        email,
-        password,
+      const response = await axios.post(`http://0.0.0.0:8000/api/v1/password-reset/`, {
+        email: username // Assuming username is the email
       });
+      console.log('Password reset response:', response.data);
+      setErrorMessage('a reset link has been sent to your email');
+      toast.success('If your account exists, a reset link has been sent to your email');
 
-      if (!response || !response.data) {
-        throw new Error('Invalid response from server');
-      }
+      setTimeout(() => {
+        
+      setResetModalOpen(false);
+      }, 3000);
 
-      const { accessToken } = response.data;
-      localStorage.setItem('accessToken', accessToken);
-      const decodedToken = jwtDecode(accessToken);
-
-      sessionStorage.setItem('loggedInUser', JSON.stringify(decodedToken));
-      console.log('Decoded token:', decodedToken);
-      setUser(decodedToken)
-
-      navigate('/dashboard', { replace: true });
     } catch (error) {
-      console.error('Error logging in:', error);
-      toast.error('Failed to login');
-      setLoading(false);
+      console.error('Password reset error:', error);
+      setErrorMessage('Failed to send reset link. Please try again later.');
     }
   };
 
 
-
-
-
   return (
-    <div className='bg-black m-0 p-0'>
-      <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" />
-      <div className="flex justify-center items-center h-screen">
-        <div className="login-card">
-          <div className="bg-white m-sm-5 m-md-5 mx-md-5 mx-sm-0 p-4 rounded-lg strong-shadow z-10">
+    <div className='m-0 p-0'>
+       <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
+
+      <div className='header-box-logo'>
+        <img className='caritaslogo  mt-0 flex justify-end' src={caritaslogo} alt='logo' />
+      </div>
+
+      <div className="flex justify-end items-center my-10 mx-3 md:h-screen sm:h-screen custom-height">
+        <div className="Background fixed">
+          <div className='Ellipse3'></div>
+          <div className='Ellipse1'></div>
+          <div className='Ellipse2'></div>
+        </div>
+
+        <div className={resetModalOpen === true ? 'd-none' : 'login-card alert m-0'}>
+          <div className='mt-5 mb-2'>
+            <h6 className='text-lg lg:text-xl text-red-600 m-0 p-0 fw-bold text-center capitalize'>workplan management </h6>
+            <h6 className='text-lg lg:text-xl text-red-600 p-0 m-0 fw-bold text-center capitalize'>system</h6>
+          </div>
+
+          <div className="bg-white p-3 rounded-lg strong-shadow z-10">
             <div className="">
-              <h6 className="sm:text-sm xs:text-sm lg:text-2xl text-danger bg-white text-center border-0 uppercase">workplan management system</h6>
-              <form onSubmit={showPasswordInput ? handleUserLogin : handleContinue}>
 
 
-                <div className="form-group" style={{ display: showPasswordInput ? 'none' : 'block' }}>
-                  <label className='text-xl fw-bold pb-1' htmlFor="email">Email</label>
-                  <div className='flex'>
-                    <div className='text-xl p-2 mb-6 rounded rounded-end-0 border border-dark shadow-sm'><i className="fa-regular fa-envelope"></i></div>
-                    <input required type="email" placeholder="Email" value={email} onChange={e => handleInputChange(e, 'email')} className="form-control p-2 mb-6 rounded rounded-start-0 border border-dark shadow-sm" />
-                  </div>
+              {errorMessage ? (
+                <p className="text-xs lg:text-sm text-center alert alert-danger lowercase">{errorMessage}</p>
+              ) : (
+                <p className="text-xs lg:text-sm alert alert-light text-dark bg-light border-0 text-center lowercase">Welcome Back</p>
+              )}
+
+              <div>
+                <div className="form-group">
+                  <label className='text-sm fw-bold pb-0' htmlFor="username">Username</label>
+                  <input required type="email" placeholder="Username" value={username} onChange={handleInputChange} className="w-full text-sm px-4 py-3 rounded border shadow-sm" name="username" />
+                </div>
+                <div className="form-group">
+                  <label className='text-sm fw-bold pb-0' htmlFor="password">Password</label>
+                  <input required type="password" placeholder="Password" value={password} onChange={handleInputChange} className="w-full text-sm px-4 py-3 rounded border shadow-sm" name="password" />
                 </div>
 
+              <button className="btn btn-link text-danger text-decoration-none" onClick={() => setResetModalOpen(true)}> Forgot Password?</button>
 
-                {showPasswordInput && (
-                  <div className="form-group">
-                    <label className='text-xl fw-bold pb-1' htmlFor="password">Password</label>
-                    <div className='flex'>
-                      <div className='text-xl p-2 mb-6 rounded rounded-end-0 border border-dark shadow-sm'><i className="fa-solid fa-unlock-keyhole"></i></div>
-                      <input required type="password" placeholder="Password" value={password} onChange={e => handleInputChange(e, 'password')} className="form-control px-2 py-2 mb-6 rounded rounded-start-0  border border-dark shadow-sm" />
-                    </div>
-                  </div>
-                )}
+                <div className='d-flex justify-center m-2 mb-0'>
+                  {/* // Disable button when loading is true */}
+                  <button type="submit" onClick={handleUserLogin} className="btn btn-danger bg-red-700 text-white rounded hover:bg-red-900" disabled={loading} >
+                    {loading ? 'Signing In...' : 'Sign In'}
+                  </button>
 
-
-                <div className="d-flex justify-between">
-                  {showPasswordInput && (
-                    <>
-                      <button type="button" className="bg-black text-white p-2 rounded hover:bg-gray-500" onClick={goBackToEmail}>Return</button>
-                      <button type="submit" className="bg-red-700 text-white p-2 rounded hover:bg-red-900" disabled={loading}>{loading ? <i className="fa-solid fa-fade fa-sm text-xs capitalize small">Validating</i> : <span>Sign In</span>}</button>
-                    </>
-                  )}
-                  {!showPasswordInput && (
-                    <button
-                      type="submit"
-                      className={`col-12 p-2 rounded hover:bg-red-400 ${email === "" ? "bg-gray-400 text-gray-700 cursor-not-allowed" : "bg-black text-white"}`}
-                      onClick={handleContinue}
-                      disabled={email === ""}
-                    >
-                      Continue
-                    </button>
-                  )}
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
+
+
+        {/* Reset Password Modal */}
+        {resetModalOpen && (
+          <>
+            <div className="modal"></div>
+            <div className="reset-password-modal p-2 w-full lg:w-96 w"> {/* Added a new class for modal */}
+              <div className="bg-black modal-dialog rounded-lg p-4 m-0">
+                <div className="bg-black text-light text-xs modal-content">
+                  <div className="modal-header py-2">
+                    <h5 className="modal-title">Reset Password</h5>
+                  </div>
+                  <div className="modal-body">
+                    <p className="mb-3">Enter your username (email) to receive a password reset link.</p>
+                    <div className="form-group">
+                      <label htmlFor="resetEmail" className="form-label">Username (Email)</label>
+                      <input type="email" id="resetEmail" name="resetEmail" className="form-control border border-dark shadow-none" value={username} onChange={(e) => setUsername(e.target.value)}/>
+                    </div>
+                  </div>
+                  <div className="flex justify-between py-3">
+                    <button type="button" className="btn btn-secondary btn-sm" onClick={() => setResetModalOpen(false)}>Close</button>
+                    <button type="button" className="btn btn-danger btn-sm" onClick={handleResetPassword}>Reset Password</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </>
+        )}
+
+
+
       </div>
+
+
     </div>
   );
-}
+};
 
 export default Login;

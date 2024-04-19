@@ -5,6 +5,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
+import Moment from 'react-moment';
+// import Moment from 'react-moment';
 
 // Function to capitalize the first letter of a string
 const capitalizeFirstLetter = (str) => {
@@ -25,17 +27,22 @@ const generateTableHeaders = (tasks, excludedKeys) => {
 
 // Function to generate table rows, excluding specified keys and formatting dates
 const generateTableRows = (task, excludedKeys) => {
+
+
   // Function to format date string into a more readable format
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Adding 1 to month because month is zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   };
 
   return Object.entries(task).map(([key, value], index) => {
     if (!excludedKeys.includes(key)) {
       // Check if the value is a date field and format it
       const formattedValue = key.includes('date') ? formatDate(value) : value;
-      return <td className='text-xs' key={index}>{formattedValue}</td>;
+      return <td className='text-sm' key={index}>{formattedValue}</td>;
     }
     return null;
   });
@@ -75,8 +82,8 @@ const DayAccordion = ({ day, tasks, excludedKeys, onApprove }) => {
 
   return (
     <Accordion.Item className='shadow-none rounded-none' eventKey={day}>
-      <Accordion.Header className='border border-dark shadow-none'>{day}</Accordion.Header>
-      <Accordion.Body>
+      <Accordion.Header className='border-2 border-dark shadow-none'>{day}</Accordion.Header>
+      <Accordion.Body className='border-dark border-2 shadow-none'>
 
         {/* Map through tasks grouped by user_unit */}
         {Object.entries(groupedByUserUnit).map(([unit, unitTasks], unitIndex) => {
@@ -155,9 +162,12 @@ function StateWorkplan() {
 
   // console.log(workplanCollate);
 
-  const excludedKeys = ['workplan_id', 'workplan_day', 'status', 'title', 'is_unit', 'is_srt', 'is_dept', 'creation_date', 'workplan_week_id', 'vehicle_id', 'assigned_pilot_id', 'approval_date', 'decline_date', 'decline_reason', 'implementing_team_id', 'user_unit', 'authorizer']
+  const excludedKeys = ['workplan_id', 'user_id', 'workplan_day', 'status', 'title', 'is_unit', 'is_srt', 'is_dept', 'creation_date', 'workplan_week_id', 'vehicle_id', 'assigned_pilot_id', 'approval_date', 'decline_date', 'decline_reason', 'implementing_team_id', 'user_unit', 'authorizer']
   // Calculate the total number of workplans
   const totalWorkplans = Object.values(groupedWorkplans).reduce((total, tasks) => total + tasks.length, 0);
+
+  const weekAndQuarter = JSON.parse(sessionStorage.getItem('weekAndQuarter'));
+  const todayDate = new Date();
 
   return (
     <DefaultLayout pageTitle="approved state Weekly Workplan">
@@ -165,20 +175,30 @@ function StateWorkplan() {
       <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
       <div className="container-fluid mx-auto mt-10">
 
+
         <div className="alert alert-dark flex justify-between align-center">
-          <h5 className="capitalize text-sm lg:text-lg">Activities: <span className='badge bg-red-800 text-sm'>{totalWorkplans}</span> </h5>
-          <h5 className="capitalize text-sm lg:text-lg hidden lg:block">state: <span className='badge bg-red-800 text-sm'>Abia</span></h5> 
-          <h5 className="capitalize text-sm lg:text-lg hidden lg:block">week: <span className='badge bg-red-800 text-sm'>21</span></h5> 
-          <h5 className="capitalize text-sm lg:text-lg hidden lg:block">Fiscal year: <span className='badge bg-red-800 text-sm'>2024 (Q3)</span></h5> 
-          <h5 className="capitalize text-sm lg:text-lg"><Link className="font-bold text-decoration-none mb-0" to="/dashboard" title="Home"> dashboard</Link></h5>
+          <h5 className="capitalize text-sm mb-0 pb-0 lg:text-lg">Activities: <span className='badge bg-red-800 text-sm'>{totalWorkplans}</span> </h5>
+          <h5 className="capitalize text-sm mb-0 pb-0 lg:text-lg hidden lg:block">state: <span className='badge bg-red-800 text-sm'>Abia</span></h5>
+          <h5 className="capitalize text-sm mb-0 pb-0 lg:text-lg hidden lg:block">week: <span className='badge bg-red-800 text-sm'>{weekAndQuarter.week}</span></h5>
+          <h5 className="capitalize text-sm mb-0 pb-0 lg:text-lg hidden lg:block">quarter: <span className='badge bg-red-800 text-sm'>{weekAndQuarter.quarter}</span></h5>
+          <h5 className="capitalize text-sm mb-0 pb-0 lg:text-lg"><Link className="font-bold text-decoration-none mb-0" to="/dashboard" title="Home"> dashboard</Link></h5>
         </div>
 
-        <Accordion defaultActiveKey="0">
-          {/* Map through groupedWorkplans and render accordion for each day */}
-          {Object.entries(groupedWorkplans).map(([day, tasks], index) => (
-            <DayAccordion key={index} day={day} tasks={tasks} excludedKeys={excludedKeys} onApprove={handleApprove} />
-          ))}
-        </Accordion>
+        {/* Loading message */}
+        {loading && <div>Loading workplans...</div>}
+
+        {totalWorkplans === 0 ? <p className="alert alert-danger font-bold text-center">No work plans available for the week.</p> : <p className=""></p>}
+
+        {!loading && (
+          <Accordion defaultActiveKey="0">
+            {/* Map through groupedWorkplans and render accordion for each day */}
+            {Object.entries(groupedWorkplans).map(([day, tasks], index) => (
+              <DayAccordion key={index} day={day} tasks={tasks} excludedKeys={excludedKeys} onApprove={handleApprove} />
+            ))}
+          </Accordion>
+        )}
+
+
       </div>
     </DefaultLayout>
   );

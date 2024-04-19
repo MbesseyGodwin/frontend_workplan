@@ -22,25 +22,23 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
   // console.log(loggedInUser);
 
   // Function to generate the date for the selected day
-  // Function to generate the date for the selected day
   const generateDateForDay = (day) => {
     const currentDate = new Date();
     const currentDay = currentDate.getDay(); // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-    const daysToAdd = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].indexOf(day) - currentDay;
+    const daysToAdd = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].indexOf(day) - currentDay;
     const nextDate = new Date(currentDate);
     nextDate.setDate(currentDate.getDate() + daysToAdd);
-
-    // Get the year, month, and day components
+  
     const year = nextDate.getFullYear();
-    const month = String(nextDate.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
-    const dayOfMonth = String(nextDate.getDate()).padStart(2, '0');
-
-    // Return the date in the desired format "YYYY-MM-DD"
-    return `${year}-${month}-${dayOfMonth}`;
+    const month = (nextDate.getMonth() + 1).toString().padStart(2, '0'); // Add leading zero if needed
+    const date = nextDate.getDate().toString().padStart(2, '0'); // Add leading zero if needed
+  
+    return `${year}-${month}-${date}`;
   };
+  
+  // Example usage:
+  // console.log(generateDateForDay('wednesday')); // Output: "2024-04-03"
 
-
- 
 
   const axiosJWT = axios.create();
 
@@ -49,7 +47,7 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
    // Use useMemo to memoize the loginUser object
    const loginUser = useMemo(() => ({
     label: `${loggedInUser.fName} ${loggedInUser.lName}`,
-    value: loggedInUser.userID,
+    value: loggedInUser.userID, 
   }), [loggedInUser.fName, loggedInUser.lName, loggedInUser.userID]); // Only re-create if firstName, lastName, or userID change
 
 
@@ -88,24 +86,28 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
 
 
 
-  const workplanTypes = ["individual", "unit", "department", "srt"];
-  const logisticRequired = ['yes', 'no'];
+  const workplanTypes = [loggedInUser.user_unit, "srt a", "srt b", "srt c", "srt d"];
+  const logisticRequired = ['yes', 'no', 'accommodation'];
 
   const [workplanData, setWorkplanData] = useState({
     user_id: currentUserId,
     title: `workplan for ${day}`,
-    workplan_type: 1,
+    workplan_type: loggedInUser.user_unit,
     workplan_day: day,
     workplan_date: generateDateForDay(day),
-    destination: '',
-    location: '',
+    destination: 'aba',
+    location: 'sda',
     departure_time: '09:00',
     logistic_required: "yes",
-    description: '',
+    description: 'for folder auditing',
     implementing_team: [],
     authorizer: '',
     user_unit: loggedInUser.user_unit
   });
+
+
+
+  // console.log(loggedInUser.user_unit);
 
   useEffect(() => {
     // Update workplanData with actual userID on component mount
@@ -318,15 +320,15 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
           <div className="col-6 col-lg-3 mb-3">
             <label htmlFor="workplan_type" className='block text-gray-700 font-semibold text-sm capitalize'>Workplan Type: </label>
             <select
-              className="form-control shadow-none form-input w-full border border-dark"
+              className="form-control text-sm shadow-none form-input w-full border border-dark"
               required
               name="workplan_type"
               id="workplan_type"
               value={workplanData.workplan_type} // Set the selected value
-              onChange={(e) => setWorkplanData({ ...workplanData, workplan_type: parseInt(e.target.value) })} // Parse the value to an integer
+              onChange={(e) => setWorkplanData({ ...workplanData, workplan_type: e.target.value })} // Parse the value to an integer
             >
               {workplanTypes.map((type, index) => (
-                <option key={index} value={index + 1}>{type}</option> // Use index + 1 as value
+                <option key={index} value={type}>{type}</option> // Use index + 1 as value
               ))}
             </select>
           </div>
@@ -335,35 +337,35 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
           {/* Input for workplan day */}
           <div className="col-6 col-lg-3 mb-3">
             <label htmlFor="task" className="block text-gray-700 font-semibold text-sm capitalize">Workplan Day:</label>
-            <input type="text" id="" name="" readOnly value={workplanData.workplan_day} onChange={handleChange} className="form-control lowercase shadow-none form-input w-full border border-dark" />
+            <input type="text" id="" name="" readOnly value={workplanData.workplan_day} onChange={handleChange} className="form-control text-sm lowercase shadow-none form-input w-full border border-dark" />
           </div>
 
 
           {/* Input for user id */}
           {/* <div className="col-6 col-lg-3 mb-3">
             <label htmlFor="userID" className="block text-gray-700 font-semibold text-sm capitalize">user id:</label>
-            <input type="text" id="" name="" readOnly value={workplanData.user_id} onChange={handleChange} className="form-control lowercase shadow-none form-input w-full border border-dark" />
+            <input type="text" id="" name="" readOnly value={workplanData.user_id} onChange={handleChange} className="form-control text-sm lowercase shadow-none form-input w-full border border-dark" />
           </div> */}
 
 
           {/* Input for workplan date */}
           <div className="col-6 col-lg-3 mb-3">
             <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Workplan Date:</label>
-            <input type="text" id="" name="" readOnly required value={workplanData.workplan_date} onChange={handleChange} className="form-control shadow-none form-input w-full border border-dark" />
+            <input type="text" id="" name="" readOnly required value={workplanData.workplan_date} onChange={handleChange} className="form-control text-sm shadow-none form-input w-full border border-dark" />
           </div>
 
 
           {/* Input for destination */}
           <div className="col-6 col-lg-3 mb-3">
             <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Destination:</label>
-            <input type="text" id="destination" autoComplete='off' name="destination" required value={workplanData.destination} onChange={handleChange} className="form-control shadow-none form-input w-full border border-dark" />
+            <input type="text" id="destination" autoComplete='off' name="destination" required value={workplanData.destination} onChange={handleChange} className="form-control text-sm shadow-none form-input w-full border border-dark" />
           </div>
 
 
           {/* Input for location */}
           <div className="col-6 col-lg-3 mb-3">
             <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Location:</label>
-            <input type="text" id="location" name="location" required value={workplanData.location} onChange={handleChange} className="form-control shadow-none form-input w-full border border-dark" />
+            <input type="text" id="location" autoComplete='off' name="location" required value={workplanData.location} onChange={handleChange} className="form-control text-sm shadow-none form-input w-full border border-dark" />
           </div>
 
 
@@ -376,12 +378,12 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
               id="authorizeBySelect"
               value={workplanData.authorizer}
               onChange={(e) => setWorkplanData({ ...workplanData, authorizer: e.target.value })}
-              className="form-control shadow-none form-input w-full border border-dark"
+              className="form-control text-sm shadow-none form-input w-full border border-dark"
               required
             >
               <option value="">Select Supervisor</option>
               {users.map((user) => (
-                <option className='form-control' key={user.user_id} value={user.user_id}>{`${user.first_name} ${user.last_name}`}</option>
+                <option className='form-control text-sm' key={user.user_id} value={user.user_id}>{`${user.first_name} ${user.last_name}`}</option>
               ))}
             </select>
           </div>
@@ -390,7 +392,7 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
           {/* Input for departure time */}
           <div className="col-6 col-lg-3 mb-3">
             <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Departure Time:</label>
-            <input type='time' id="departure_time" name="departure_time" required value={workplanData.departure_time} onChange={handleChange} className="form-control shadow-none form-input w-full border border-dark" />
+            <input type='time' id="departure_time" name="departure_time" required value={workplanData.departure_time} onChange={handleChange} className="form-control text-sm shadow-none form-input w-full border border-dark" />
           </div>
 
 
@@ -401,7 +403,7 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
             <label htmlFor="logistic" className='block text-gray-700 font-semibold text-sm capitalize'>Logistic Required:</label>
             
             <select
-              className="form-control shadow-none form-input w-full border border-dark"
+              className="form-control text-sm shadow-none form-input w-full border border-dark"
               required
               name="logistic"
               id="logistic"
@@ -428,15 +430,15 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
               onChange={handleTeamSelection}
               labelledBy="Select"
               overrideStrings={{ selectSomeItems: 'Select Team Members...' }}
-              className="shadow-none form-input w-full border rounded border-dark"
+              className="text-xs shadow-none form-input w-full border rounded border-dark"
             />
 
             {/* Render the selected team members with remove buttons */}
-            <div className="alert alert-dark p-1 flex flex-wrap space-x-2">
+            <div className="bg-slate-500 rounded-lg p-1 flex flex-wrap space-x-2">
               {selectedTeam.map(user => (
                 <div className="selected-team-member bg-success text-white px-2 py-1 m-1 rounded flex items-center space-x-2" key={user.value}>
-                  <span className='text-sm text-white'>{user.label}</span>
-                  <button className="btn-remove text-sm btn btn-sm p-0 btn-danger hover:bg-green-600" onClick={() => removeUserFromTeam(user.value)}>
+                  <span className='text-xs text-white'>{user.label}</span>
+                  <button className="btn-remove text-xs btn btn-sm p-0 btn-danger" onClick={() => removeUserFromTeam(user.value)}>
                     <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10L4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
@@ -455,9 +457,10 @@ const WorkplanForm = ({ day, existingWorkplan, onSubmit, handleClose, currentUse
           <div className="col-12 mb-3">
             <label htmlFor="" className="block text-gray-700 font-semibold text-sm capitalize">Task Description:</label>
             <textarea
-              rows={10}
+             required
+              rows={5}
               cols={5}
-              className="form-control shadow-none form-input w-full border border-dark"
+              className="form-control text-sm shadow-none form-input w-full border border-dark"
               value={workplanData.description}
               onChange={(e) => setWorkplanData({ ...workplanData, description: e.target.value })}
             />

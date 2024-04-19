@@ -151,11 +151,11 @@ function ApproveRequest() {
             {workplanRequests.length === 0 ?
               <div className="w w-100 w-full">
                 <div className="alert alert-dark flex justify-between align-center">
-                  <h4 className="font-bold text-lg text-decoration-none capitalize">no pending workplan requests waiting your approval</h4>
+                  <h4 className="font-bold text-lg text-decoration-none capitalize">no pending approvals</h4>
                   <Link className="font-bold text-lg text-decoration-none capitalize" to="/dashboard" title="Home">Dashboard</Link>
                 </div>
               </div> : <div className="alert alert-dark flex justify-between align-center">
-                <h4 className="font-bold text-lg text-decoration-none capitalize">All Pending Approvals</h4>
+                <h4 className="font-bold text-lg text-decoration-none capitalize">Pending Approvals</h4>
                 <Link className="font-bold text-lg text-decoration-none capitalize" to="/dashboard" title="Home">Dashboard</Link>
               </div>
             }

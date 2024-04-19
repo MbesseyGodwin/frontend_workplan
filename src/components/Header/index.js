@@ -51,7 +51,7 @@ const Header = ({ sidebarOpen, setSidebarOpen, pageTitle, loggedInUser }) => {
         {/* User Information */}
         <div className='text-center pb-0 mb-0'>
           <Link className="text-center text-white text-decoration-none hover:text-red-900" to="/settings" title="Account">
-          <h1 className='text-xs lg:text-lg p-0 m-0'>{`${loggedInUser.fName} ${loggedInUser.lName}`}</h1>
+          <h1 className='text-xs lg:text-lg p-0 m-0'>{`${loggedInUser.first_name} ${loggedInUser.last_name}`}</h1>
           <p className='text-xs lg:text-lg p-0 m-0'>{`${loggedInUser.email}`}</p>
           </Link>
         </div>

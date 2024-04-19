@@ -1,8 +1,12 @@
 import React, { Suspense, lazy, useEffect } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, useParams, Route, Routes } from 'react-router-dom';
 import Cookies from 'js-cookie'; // Import js-cookie library
 
+// import {  } from 'react-router-dom';
+
 import "./index.css";
+import ViewEmployees from './components/employees/ViewEmployees';
+import PasswordReset from './components/login/PasswordReset';
 
 const Login = lazy(() => import('./components/login/Login'));
 const Signup = lazy(() => import('./components/signup/Signup'));
@@ -22,27 +26,19 @@ const AssignVehicle = lazy(() => import('./components/requests/AssignVehicle'));
 const App = () => {
   const loggedInUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
 
-  const checkAccessTokenInCookies = () => {
-    const accessTokenFromCookies = Cookies.get('accessToken');
-    if (!accessTokenFromCookies) {
-      const accessTokenFromLocalStorage = localStorage.getItem('accessToken');
-      if (accessTokenFromLocalStorage) {
-        Cookies.set('accessToken', accessTokenFromLocalStorage, { expires: 7 });
-      }
-    }
-  };
-
-  useEffect(() => {
-    checkAccessTokenInCookies();
-  }, []);
-
   return (
     <BrowserRouter>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path='/' element={<Login />} />
+
+
+          <Route path='/password-reset' element={<PasswordReset />} />
+
+          
+
           <Route path='/signup' element={<Signup />} />
-          <Route path='/dashboard/*' element={<Dashboard />} />
+          <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/create-workplan' element={<CreateWorkplan />} />
           <Route path='/state-workplan' element={<StateWorkplan />} />
           <Route path='/workplan-status' element={<WorkplanStatus />} />
@@ -51,12 +47,19 @@ const App = () => {
           <Route path='/visit-summary' element={<VisitSummary />} />
           <Route path='/settings' element={<Setting />} />
           <Route path='/approve-request' element={<ApproveRequest />} />
-          <Route path='/collate-workplan' element={<CollateWorkplan />} />
           <Route path='/assign-vehicle' element={<AssignVehicle />} />
 
-          {loggedInUser && loggedInUser.roleID === 1 && (
-            <Route path='/manage-users' element={<ManageUser />} />
-          )}
+
+          <Route path='/manage-users' element={<ManageUser />} />
+          <Route path='/view-employees' element={<ViewEmployees />} />
+
+
+          <Route path='/collate-workplan' element={<CollateWorkplan />} />
+
+
+          <Route path='/assign-vehicle' element={<AssignVehicle />} />
+
+
         </Routes>
       </Suspense>
     </BrowserRouter>
